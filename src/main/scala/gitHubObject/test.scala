@@ -1,6 +1,5 @@
 package gitHubObject
 
-
 import org.apache.http.impl.client.HttpClientBuilder
 
 import scala.io.Source.fromInputStream
