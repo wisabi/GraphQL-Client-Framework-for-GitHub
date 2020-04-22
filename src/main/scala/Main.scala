@@ -8,44 +8,7 @@ object Main extends App {
   val BASE_GHQL_URL = "https://api.github.com/graphql"
   val temp="{viewer {email login url}}"
   //implicit val formats = DefaultFormats
-  val repos =  "query ObtainRepos($allRepos: Boolean!){ " +
-                " viewer {" +
-                "    ...AllRepos @include(if: $allRepos) "+
-                "  } " +
-                "}" +
-                " fragment AllRepos on User {  "+
-                "    Users_Own_Repos: repositories {  "+
-                "      ...repoInfo  "+
-                "    }  "+
-                "    Contributed_To_Repos: repositoriesContributedTo{ "+
-                "      ...repoInfo  "+
-                "    }  "+
-                " }  "+
-                " fragment repoInfo on RepositoryConnection {  " +
-                "    ListOfRepos: edges {  " +
-                "      Repo: node { "+
-                "        Owner_and_Repo: nameWithOwner "+
-                "        Created: createdAt "+
-                "        Last_Pushed: pushedAt "+
-                "        Description: description "+
-                "        Disk_Usage : diskUsage "+
-                "        forks {  "+
-                "          totalCount "+
-                "        }  "+
-                "        pullRequests {  "+
-                "          totalCount "+
-                "        }  "+
-                "        LanguagesUsed: languages(first: 3){ "+
-                "          ListOfLanguages: edges { "+
-                "            ProgramingLanguage: node { "+
-                "              Language: name "+
-                "            } " +
-                "          } " +
-                "        } " +
-                "     } " +
-                "   } " +
-                " } "
-
+  val repos = gitHubObject.client_data.repos
 
   val client = HttpClientBuilder.create.build
   val httpUriRequest = new HttpPost(BASE_GHQL_URL)

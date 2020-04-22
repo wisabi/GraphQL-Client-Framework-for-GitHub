@@ -1,9 +1,6 @@
 package gitHubObject
 
-import com.howtographql.scala.sangria.gitHubObject.file_format.file_format
-import io.github.algd.oauth.utils.OAuthParams
-import org.apache.http.client.methods.HttpPost
-import shapeless.T
+
 import sun.security.krb5.internal.AuthorizationData
 
 import scala.concurrent.{ExecutionContext, Future}
@@ -18,6 +15,6 @@ trait builder_interface {
   def setAuthorization(authCode:Option[String]): String = {
     "Bearer " + authCode
   }
-  //def setHeader(accept:Option[String],format:file_format): Boolean
+  def setHeader(accept:Option[String],format:file_format.Value)
 
 }
