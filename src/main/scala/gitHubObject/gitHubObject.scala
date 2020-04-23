@@ -27,6 +27,8 @@ object gitHubObject {
     client_data.httpUriRequest.addHeader("Accept", "application/json")
     }
 }
+
+
 case class gitHubObjectBuilder[I <: gitHubObject](httpUriRequest:Option[HttpPost] = Some(client_data.httpUriRequest),client: Option[CloseableHttpClient] = Some(client_data.closeable_connection)){
   //Default values
 

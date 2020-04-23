@@ -1,6 +1,8 @@
-trait Query extends Enumeration {
+package Queries
 
-  def setRepos(repos: Repository.Value): Query
+trait Query{
+
+  def setRepos(repos: QueryType.Value): Query
 
   def setLanguages(languages: List[ProgramingLanguages.Language] ) : Query
 

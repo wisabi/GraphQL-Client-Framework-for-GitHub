@@ -5,9 +5,9 @@ import org.apache.http.impl.client.{CloseableHttpClient, HttpClientBuilder}
 
 object client_data {
   val BASE_GHQL_URL = "https://api.github.com/graphql"
-  val temp="{viewer {email login url}}"
+  val temp = "{viewer {email login url}}"
   val closeable_connection: CloseableHttpClient = HttpClientBuilder.create.build
-  val httpUriRequest = new HttpPost(client_data.BASE_GHQL_URL)
+  val httpUriRequest = new HttpPost(BASE_GHQL_URL)
 
  //gitHubObject.setHeader(Some("Accept"),file_format.APPJSON)
   val repos =  "query ObtainRepos($allRepos: Boolean!){ " +
@@ -15,27 +15,27 @@ object client_data {
     "    ...AllRepos @include(if: $allRepos) "+
     "  } " +
     "}" +
-    " fragment AllRepos on User {  "+
+    " fragment AllRepos on User {  " +
     "    Users_Own_Repos: repositories {  "+
-    "      ...repoInfo  "+
-    "    }  "+
-    "    Contributed_To_Repos: repositoriesContributedTo{ "+
-    "      ...repoInfo  "+
+    "      ...repoInfo  " +
+    "    }  " +
+    "    Contributed_To_Repos: repositoriesContributedTo{ " +
+    "      ...repoInfo  " +
     "    }  "+
     " }  "+
     " fragment repoInfo on RepositoryConnection {  " +
     "    ListOfRepos: edges {  " +
-    "      Repo: node { "+
-    "        Owner_and_Repo: nameWithOwner "+
-    "        Created: createdAt "+
-    "        Last_Pushed: pushedAt "+
-    "        Description: description "+
-    "        Disk_Usage : diskUsage "+
-    "        forks {  "+
-    "          totalCount "+
-    "        }  "+
-    "        pullRequests {  "+
-    "          totalCount "+
+    "      Repo: node { " +
+    "        Owner_and_Repo: nameWithOwner " +
+    "        Created: createdAt " +
+    "        Last_Pushed: pushedAt " +
+    "        Description: description " +
+    "        Disk_Usage : diskUsage " +
+    "        forks {  " +
+    "          totalCount " +
+    "        }  " +
+    "        pullRequests {  " +
+    "          totalCount " +
     "        }  "+
     "        LanguagesUsed: languages(first: 3){ "+
     "          ListOfLanguages: edges { "+
