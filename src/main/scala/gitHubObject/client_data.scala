@@ -4,11 +4,6 @@ import org.apache.http.client.methods.HttpPost
 import org.apache.http.impl.client.{CloseableHttpClient, HttpClientBuilder}
 
 object client_data {
-  val BASE_GHQL_URL = "https://api.github.com/graphql"
-  val temp = "{viewer {email login url}}"
-  val closeable_connection: CloseableHttpClient = HttpClientBuilder.create.build
-  val httpUriRequest = new HttpPost(BASE_GHQL_URL)
-
  //gitHubObject.setHeader(Some("Accept"),file_format.APPJSON)
   val repos =  "query ObtainRepos($allRepos: Boolean!){ " +
     " viewer {" +
