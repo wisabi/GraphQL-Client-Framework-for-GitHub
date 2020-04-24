@@ -1,10 +1,17 @@
 package gitHubObject
 
+import com.typesafe.config.{Config, ConfigFactory}
 import org.apache.http.client.methods.HttpPost
 import org.apache.http.impl.client.{CloseableHttpClient, HttpClientBuilder}
 
 object client_data {
- //gitHubObject.setHeader(Some("Accept"),file_format.APPJSON)
+
+ def GetAuthCodeFromConfig(): String = {
+  val config: Config = ConfigFactory.load("lightbend.conf")
+  val key = config.getString("githubAPI.key")
+  key
+ }
+
   val repos =  "query ObtainRepos($allRepos: Boolean!){ " +
     " viewer {" +
     "    ...AllRepos @include(if: $allRepos) "+

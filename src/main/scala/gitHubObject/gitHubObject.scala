@@ -1,6 +1,7 @@
 package gitHubObject
 
 import Queries.Main.httpUriRequest
+import com.typesafe.config.{Config, ConfigFactory}
 import org.apache.http.client.methods.{CloseableHttpResponse, HttpPost}
 import org.apache.http.impl.client.{CloseableHttpClient, HttpClientBuilder}
 import sun.security.krb5.internal.AuthorizationData
@@ -31,9 +32,10 @@ object gitHubObject {
     "}" )
   /// gqlReq => function to set any entity based on given (String)
   // Then execute and return json response
-  def setAuthorization(authorizationCode: String): Unit ={
+
+  def setAuthorization(key: String): Unit ={
     ///setAuthorization in builder pattern
-    httpUriRequest.addHeader("Authorization", "Bearer " + authorizationCode)
+    httpUriRequest.addHeader("Authorization", "Bearer " + key)
     httpUriRequest.addHeader("Accept", "application/json")
   }
   def setAndGet(str: String): String = {
@@ -53,9 +55,6 @@ object gitHubObject {
       }
     }
   }
-
-
-
   ///Builder hiding complexity but demanding these traits
   type MandatoryInfo = HttpUriRequest with Client with authCode
 
@@ -68,8 +67,6 @@ object gitHubObject {
     Some(gitHubObject.closeable_connection.execute(gitHubObject.httpUriRequest)) //CloseableHttpResponse
   }
 }
-
-
 case class gitHubObjectBuilder[I <: gitHubObject](httpUriRequest:Option[HttpPost] = Some(gitHubObject.httpUriRequest),client: Option[CloseableHttpClient] = Some(gitHubObject.closeable_connection),key:String = ""){
   //Default values
   //gitHubObject.setHeader(Some("Accept"),file_format.APPJSON)
@@ -78,7 +75,7 @@ case class gitHubObjectBuilder[I <: gitHubObject](httpUriRequest:Option[HttpPost
     this.copy(httpUriRequest = httpUriRequest)
   def withClient(client: Option[CloseableHttpClient]): gitHubObjectBuilder[I with gitHubObject.Client] =
     this.copy(client = client)
-  def withAuthCode(key: String): gitHubObjectBuilder[I with gitHubObject.authCode] =
+  def withAuthCode(key:String): gitHubObjectBuilder[I with gitHubObject.authCode] =
     this.copy(key = key)
   def build(implicit ev: I =:= gitHubObject.MandatoryInfo): _gitHubObjectBuilder =
     _gitHubObjectBuilder(gitHubObject.httpUriRequest,gitHubObject.gqlReq,gitHubObject.setAuthorization(key))
