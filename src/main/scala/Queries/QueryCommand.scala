@@ -7,7 +7,8 @@ import ProgramingLanguages.Language
 
 class QueryCommand(repos: Query = AllRepos, languages: List[Language] = List(All)) extends Query {
 
- //
+ //TODO: get rid of contributed repos
+  //
 
   def setRepos(settingRepos: QueryType.Value): QueryCommand = {
      new QueryCommand(settingRepos)
