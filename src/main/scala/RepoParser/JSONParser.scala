@@ -2,7 +2,7 @@ package RepoParser
 import org.json4s.DefaultFormats
 import org.json4s.jackson.JsonMethods.parse
 
-object JSonParser {
+object JSONParser {
 
 
   case class R00tJsonObject(data: Data)
@@ -46,5 +46,7 @@ object JSonParser {
 
     //Gets list of jacob's own repos.
     p.data.viewer.Users_Own_Repos.ListOfRepos
+
+
   }
 }
