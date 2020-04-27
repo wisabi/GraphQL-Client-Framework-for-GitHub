@@ -2,13 +2,13 @@ package Queries
 
 object ProgramingLanguages extends Enumeration {
   type Language = Value
-  val All: ProgramingLanguages.Value = Value("All")
-  val Java: ProgramingLanguages.Value = Value("Java")
-  val Scala: ProgramingLanguages.Value = Value("Scala")
-  val CSS: ProgramingLanguages.Value = Value("CSS")
-  val HTML: ProgramingLanguages.Value = Value("HTML")
-  val JavaScript: ProgramingLanguages.Value = Value("JavaScript")
-  val Python: ProgramingLanguages.Value = Value("Python")
-  val CPP: ProgramingLanguages.Value = Value("C++")
+  val All: ProgramingLanguages.Language = Value("All")
+  val Java: ProgramingLanguages.Language = Value("Java")
+  val Scala: ProgramingLanguages.Language = Value("Scala")
+  val CSS: ProgramingLanguages.Language = Value("CSS")
+  val HTML: ProgramingLanguages.Language= Value("HTML")
+  val JavaScript: ProgramingLanguages.Language = Value("JavaScript")
+  val Python: ProgramingLanguages.Language = Value("Python")
+  val CPP: ProgramingLanguages.Language = Value("C++")
 
 }

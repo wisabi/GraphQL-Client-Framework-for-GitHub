@@ -11,7 +11,7 @@ import scala.io.Source.fromInputStream
 
 object Main extends App {
 
-  val
+
   val function = QueryBuilder().withQueryType(AllRepos).withRequest(AllRepos.toString).withFilter(RepoFilters.includeLanguages(List(Java,Scala)))
 
 
