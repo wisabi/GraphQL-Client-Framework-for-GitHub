@@ -36,5 +36,6 @@ object QueryType extends Enumeration {
                                             "     } " +
                                             "   } " +
                                             " } ")
+
   val UserInfo: QueryType.Value = Value("info")
 }

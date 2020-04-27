@@ -3,12 +3,22 @@ package Queries
 import org.apache.http.client.methods.HttpPost
 import org.apache.http.entity.StringEntity
 import org.apache.http.impl.client.HttpClientBuilder
+//import QueryInfo
+import QueryType.AllRepos
+import ProgramingLanguages.{Java, Scala, HTML, CSS, CPP, Python, JavaScript, All}
 
 import scala.io.Source.fromInputStream
 
 object Main extends App {
 
+  val
+  val function = QueryBuilder().withQueryType(AllRepos).withRequest(AllRepos.toString).withFilter(RepoFilters.includeLanguages(List(Java,Scala)))
 
+
+
+
+
+/*
 
   val BASE_GHQL_URL = "https://api.github.com/graphql"
   val temp="{viewer {email login url}}"
@@ -41,5 +51,5 @@ object Main extends App {
       System.out.println(viewer)
       System.out.println(write(viewer))*/
     }
-  }
+  }*/
 }
