@@ -3,9 +3,9 @@ package Queries
 import Queries.QueryInfo.Request
 import RepoParser.JSONParser.ListOfRepos
 import RepoParser.JSONParser
-import gitHubObject.gitHubObject
 import QueryType.AllRepos
 import QueryType.UserInfo
+import gitHubObject.GHQLResponse
 
 sealed trait QueryInfo
 
@@ -13,25 +13,22 @@ object QueryInfo {
   sealed trait QueryType extends QueryInfo
   sealed trait Request extends QueryInfo
 
-  type EssentialInfo = QueryType with Request
+  type EssentialInfo = QueryType
 }
 
-case class QueryBuilder [I <: QueryInfo ](queryType: String = "", request: String = "", filterFunctions: List[ListOfRepos => Boolean] = List() ){
+case class QueryBuilder [I <: QueryInfo ](query: String = "", filterFunctions: List[ListOfRepos => Boolean] = List() ){
 
-  def withQueryType (queryType: QueryType.Query) :  QueryBuilder[I with QueryInfo] =
-    this.copy(queryType = queryType.toString)
-
-  def withRequest (request: String) : QueryBuilder[I with Request] =
-    this.copy(request = request)
+  def withQueryType (queryType: QueryType.Query) :  QueryBuilder[I with QueryInfo.QueryType] =
+    this.copy(query = queryType.toString)
 
   def withFilter(f: ListOfRepos => Boolean): QueryBuilder[I] =
     this.copy(filterFunctions = filterFunctions ++ List(f) )
 
 
-  def build(implicit ev : I =:= QueryInfo.EssentialInfo) : gitHubObject => List[ListOfRepos] = {
-
-    def GenerateList(intk: Int)(gitHub: gitHubObject): List[ListOfRepos] = {
-      val json = gitHubObject.setAndGet("NA")
+  def build(implicit ev : I =:= QueryInfo.EssentialInfo) : GHQLResponse => List[ListOfRepos] = {
+    //function to return
+    def GenerateList(Q: Query)(gitHub: GHQLResponse): List[ListOfRepos] = {
+      val json = gitHub.setAndGet(Q.query)
       val RepoList = JSONParser.getRepoList(json)
 
       /* filter part */
@@ -42,6 +39,12 @@ case class QueryBuilder [I <: QueryInfo ](queryType: String = "", request: Strin
       currentSate
     }
 
-    GenerateList(2)
+    //modify query if needed
+
+    //return function partially called
+    GenerateList(Query(query, filterFunctions))
   }
+
 }
+
+case class Query(query: String = "", filterFunctions: List[ListOfRepos => Boolean] = List())

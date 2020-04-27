@@ -1,5 +1,0 @@
-package Queries
-
-class repoTest {
-
-}

@@ -29,6 +29,7 @@ object QueryType extends Enumeration {
   val MyRepos: QueryType.Query = Value( "{ \"query\": \"query{ viewer{ RepositoriesConnections: repositories{ " + RepoInfo + " } } } \" }")
   val MyContributedToRepos: QueryType.Query = Value( "query{ viewer{ RepositoriesConnections: repositoriesContributedTo{ " + RepoInfo + " } }")
 
+
 /*
 "{  \"query\":      \"" + client_data.repos + "\", " +
     "   \"operationName\": \"ObtainRepos\",  " +
