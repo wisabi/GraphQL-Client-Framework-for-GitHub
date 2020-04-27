@@ -9,8 +9,8 @@ import java.io.File
 
 object test extends App {
 
-  val test = new gitHubObjectBuilder[gitHubObject]().withHTTP(Some(gitHubObject.httpUriRequest)).withClient(Some(gitHubObject.closeable_connection)).withAuthCode(client_data.GetAuthCodeFromConfig()).build
+  val test = new Github[gitHubObject]().withAuthCode(client_data.GetAuthCodeFromConfig()).build
 
-  println(gitHubObject.setAndGet(client_data.repos))
+  println(test.flatMap().setAndGet(client_data.repos))
 
 }
