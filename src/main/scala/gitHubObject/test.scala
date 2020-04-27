@@ -11,6 +11,6 @@ object test extends App {
 
   val test = new Github[gitHubObject]().withAuthCode(client_data.GetAuthCodeFromConfig()).build
 
-  println(test.flatMap().setAndGet(client_data.repos))
+  //println(test.flatMap().setAndGet(client_data.repos))
 
 }

@@ -25,18 +25,18 @@ case class QueryBuilder [I <: QueryInfo ](query: String = "", filterFunctions: L
     this.copy(filterFunctions = filterFunctions ++ List(f) )
 
 
-  def build(implicit ev : I =:= QueryInfo.EssentialInfo) : GHQLResponse => List[ListOfRepos] = {
+  def build(implicit ev : I =:= QueryInfo.EssentialInfo) : GHQLResponse => Option[List[ListOfRepos]] = {
     //function to return
-    def GenerateList(Q: Query)(gitHub: GHQLResponse): List[ListOfRepos] = {
+    def GenerateList(Q: Query)(gitHub: GHQLResponse): Option[List[ListOfRepos]] = {
       val json = gitHub.setAndGet(Q.query)
       val RepoList = JSONParser.getRepoList(json)
 
       /* filter part */
       var currentSate = RepoList
-      for (function <- filterFunctions){
+      for (function <- Q.filterFunctions){
         currentSate = currentSate.filter(function)
       }
-      currentSate
+      Some(currentSate)
     }
 
     //modify query if needed
