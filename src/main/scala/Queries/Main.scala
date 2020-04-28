@@ -6,7 +6,7 @@ import org.apache.http.client.methods.HttpPost
 import org.apache.http.entity.StringEntity
 import org.apache.http.impl.client.HttpClientBuilder
 //import QueryInfo
-import QueryType.AllRepos
+import RequestType.AllRepos
 import ProgramingLanguages.{Java, Scala, HTML, CSS, CPP, Python, JavaScript, All}
 
 import scala.io.Source.fromInputStream
@@ -14,6 +14,7 @@ import scala.io.Source.fromInputStream
 object Main extends App {
 
 
+/*
   val function = QueryBuilder[QueryInfo]().withQueryType(AllRepos).withFilter(RepoFilters.includeLanguages(List(Java,Scala)))
   val githubObject = (new Github).withAuthCode(client_data.GetAuthCodeFromConfig()).build
 
@@ -24,7 +25,7 @@ object Main extends App {
   val reallist = list.get
 
   for (x <- reallist){
-    x.Repo.Owner_and_Repo
-  }
+    println(x.Repo.Owner_and_Repo)
+  }*/
 
 }

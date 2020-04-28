@@ -3,8 +3,9 @@ package Queries
 import Queries.QueryInfo.Request
 import RepoParser.JSONParser.ListOfRepos
 import RepoParser.JSONParser
-import QueryType.AllRepos
-import QueryType.UserInfo
+import RequestType.MyRepos
+import RequestType.SpecificUser
+import RequestType.MyContributedToRepos
 import gitHubObject.GHQLResponse
 
 sealed trait QueryInfo
@@ -16,12 +17,12 @@ object QueryInfo {
   type EssentialInfo = QueryType
 }
 
-case class QueryBuilder [I <: QueryInfo ](query: String = "", filterFunctions: List[ListOfRepos => Boolean] = List() ){
+case class GithubQuery [I <: QueryInfo ](queryType: RequestType.QueryRequest = MyRepos, userLogin: String = "",filterFunctions: List[ListOfRepos => Boolean] = List() ){
 
-  def withQueryType (queryType: QueryType.Query) :  QueryBuilder[I with QueryInfo.QueryType] =
-    this.copy(query = queryType.toString)
+  def withQueryType (queryType: RequestType.QueryRequest) :  GithubQuery[I with QueryInfo.QueryType] =
+    this.copy(queryType = queryType)
 
-  def withFilter(f: ListOfRepos => Boolean): QueryBuilder[I] =
+  def withFilter(f: ListOfRepos => Boolean): GithubQuery[I] =
     this.copy(filterFunctions = filterFunctions ++ List(f) )
 
 
@@ -40,9 +41,13 @@ case class QueryBuilder [I <: QueryInfo ](query: String = "", filterFunctions: L
     }
 
     //modify query if needed
+    if(queryType == SpecificUser){
+      if (userLogin.equals(""))
+
+    }
 
     //return function partially called
-    GenerateList(Query(query, filterFunctions))
+    GenerateList(Query(queryType.toString, filterFunctions))
   }
 
 }

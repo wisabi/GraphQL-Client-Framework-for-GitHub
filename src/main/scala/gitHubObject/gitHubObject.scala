@@ -53,14 +53,6 @@ case class Github[I <: gitHubObject](key:String = ""){
   //Build entire object for user with all mandatory info
 }
 case class GHQLResponse(httpUriRequest:HttpPost,closeable_connection:CloseableHttpClient){
-
-
-  val gqlReq = new StringEntity("{" +
-    "   \"query\":      \"" + client_data.repos + "\", " +
-    "   \"operationName\": \"ObtainRepos\",  " +
-    "   \"variables\":  { \"allRepos\": true } " +
-    "}" )
-
   def setAndGet(str: String): String = {
     val gqlReq = new StringEntity("{" +
       "   \"query\":      \"" + str + "\", " +
