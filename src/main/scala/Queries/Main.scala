@@ -14,18 +14,17 @@ import scala.io.Source.fromInputStream
 object Main extends App {
 
 
-/*
-  val function = QueryBuilder[QueryInfo]().withQueryType(AllRepos).withFilter(RepoFilters.includeLanguages(List(Java,Scala)))
+  val function = GithubQuery[QueryInfo]().withQueryType(AllRepos).withFilter(RepoFilters.includeLanguages(List(Java,Scala)))
   val githubObject = (new Github).withAuthCode(client_data.GetAuthCodeFromConfig()).build
 
 
-  val list: Option[List[ListOfRepos]] = githubObject.flatMap((new QueryBuilder[QueryInfo]()).withQueryType(AllRepos).withFilter(RepoFilters.includeLanguages(List(Java,Scala))).build)
+  val list: Option[List[ListOfRepos]] = githubObject.flatMap(GithubQuery[QueryInfo]().withQueryType(AllRepos).withFilter(RepoFilters.includeLanguages(List(Java,Scala))).build)
   val list2 = githubObject.flatMap(function.build)
 
-  val reallist = list.get
-
+  val realList = list.get
+  val newkh = realList.filter(RepoFilters.MaxPulls(10))
   for (x <- reallist){
     println(x.Repo.Owner_and_Repo)
-  }*/
+  }
 
 }
