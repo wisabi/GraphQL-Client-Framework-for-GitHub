@@ -2,6 +2,8 @@ package RepoParser
 import org.json4s.DefaultFormats
 import org.json4s.jackson.JsonMethods.parse
 
+import scala.annotation.tailrec
+
 object JSONParser {
 
 //
@@ -34,7 +36,6 @@ object JSONParser {
 //
 //  case class LanguagesUsed(ListOfLanguages: List[ListOfLanguages])
 //
-
 
 
 //////////////////////////////////////////////////////////////////////////////
@@ -96,8 +97,6 @@ object JSONParser {
 
 
 
-
-
 //  //Input JSON string, outputs list of repos.
 //  def getRepoList(string: String): Seq[Repo] = {
 //
@@ -139,4 +138,19 @@ object JSONParser {
     //Gets list of jacob's own repos.
     p.data.user.RepositoriesConnections.Repo//.RepositoriesConnections.Repo
   }
+
+  //Traverse through collaborator connections to get list of collaborators
+  def getCollaboratorsList(repo:Repo): List[Collaborators] = {
+    val collaboratorList: List[Collaborators] = List()
+
+    val c = repo.collaboratorsConnection
+
+    for (e <- c.collaborators){
+      collaboratorList.appended(e)
+    }
+    collaboratorList
+
+  }
+
+
 }
