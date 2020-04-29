@@ -54,13 +54,8 @@ case class Github[I <: gitHubObject](key:String = ""){
 }
 case class GHQLResponse(httpUriRequest:HttpPost,closeable_connection:CloseableHttpClient){
   def setAndGet(str: String): String = {
-    val gqlReq = new StringEntity("{" +
-      "   \"query\":      \"" + str + "\", " +
-      "   \"operationName\": \"ObtainRepos\",  " +
-      "   \"variables\":  { \"allRepos\": true } " +
-      "}" )
    // println(gqlReq)
-    httpUriRequest.setEntity(gqlReq)
+    httpUriRequest.setEntity(new StringEntity(str))
     val response = closeable_connection.execute(httpUriRequest)
     response.getEntity match {
       case null => "Response entity is null"
