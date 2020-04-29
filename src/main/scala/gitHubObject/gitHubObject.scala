@@ -54,15 +54,15 @@ case class Github[I <: gitHubObject](key:String = ""){
 }
 case class GHQLResponse(httpUriRequest:HttpPost,closeable_connection:CloseableHttpClient){
   def setAndGet(str: String): String = {
-   // println(gqlReq)
     httpUriRequest.setEntity(new StringEntity(str))
     val response = closeable_connection.execute(httpUriRequest)
     response.getEntity match {
       case null => "Response entity is null"
       case x if x != null => {
-        val s:String = fromInputStream(x.getContent).mkString
-        println(s)
-        s
+        fromInputStream(x.getContent).mkString
+        //val s:String =
+        //println(s)
+        //s
         //print("respJSON: " + respJson)
         //println(test)
       }
