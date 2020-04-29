@@ -59,16 +59,19 @@ case class GHQLResponse(httpUriRequest:HttpPost,closeable_connection:CloseableHt
       "   \"operationName\": \"ObtainRepos\",  " +
       "   \"variables\":  { \"allRepos\": true } " +
       "}" )
-    println(gqlReq)
+   // println(gqlReq)
     httpUriRequest.setEntity(gqlReq)
     val response = closeable_connection.execute(httpUriRequest)
     response.getEntity match {
       case null => "Response entity is null"
       case x if x != null => {
-        fromInputStream(x.getContent).mkString
+        val s:String = fromInputStream(x.getContent).mkString
+        println(s)
+        s
         //print("respJSON: " + respJson)
         //println(test)
       }
+
     }
   }
 
