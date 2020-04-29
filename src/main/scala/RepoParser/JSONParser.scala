@@ -53,7 +53,7 @@ object JSONParser {
 
   case class PrimaryLanguage (language: String)
 
-  case class PullRequestsConnection (totalCount: Int, pullRequestsList: Seq[])
+  case class PullRequestsConnection (totalCount: Int, pullRequestsList: Seq[])/////////////
 
   case class Repo ( repoName: String,
                     nameWithOwner: String,
