@@ -123,6 +123,8 @@ object JSONParser {
     //Builds a tree of the JSON and parses it into R00tJsonObject class.
     val p = jsValue.extract[RootInterface]
 
+    p.data.viewer.RepositoriesConnections.Repo.foreach(a => println(a.repoName))
+
     //Gets list of jacob's own repos.
     p.data.viewer.RepositoriesConnections.Repo
   }
