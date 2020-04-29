@@ -16,22 +16,44 @@ object Main extends App {
   val githubObject = (new Github).withAuthCode(client_data.GetAuthCodeFromConfig()).build
 
 
-  val MyRepoQuery = GithubQuery[QueryInfo]().withQueryType(MyRepos).withFilter(RepoFilters.includeLanguages(List(Python)))
-  val myContributedToReposQuery = GithubQuery[QueryInfo]().withQueryType(MyContributedToRepos).withFilter(RepoFilters.includeLanguages(List(Java,Scala)))
+  val MyRepoQuery = GithubQuery[QueryInfo]().withQueryType(MyRepos)
+  val myContributedToReposQuery = GithubQuery[QueryInfo]().withQueryType(MyContributedToRepos)
+  val SpecificUserQuery = GithubQuery[QueryInfo]().withQueryType(SpecificUserQuery).withSpecificUser("wisabi")
 
   val MyReposList = githubObject.flatMap(MyRepoQuery.build)
   val MyContributedToList = githubObject.flatMap(myContributedToReposQuery.build)
+  val SpecificUserList = githubObject.flatMap(SpecificUserQuery.build)
 
   val ReposList = MyReposList.get
   val ContributedReposList = MyContributedToList.get
+  val UserList = SpecificUserList.get
 
 
   for (x <- ReposList){
-    println( "My Repo: " + x.repoName)
+    println( "\n ********* My Repo  ******** \n ")
+    println("Name: " + x.repoName)
+    println("ProgramingLanguages: ")
+    for (lan <- x.languagesConnection.programingLanguages){
+      println(lan.language)
+    }
   }
 
   for (x <- ContributedReposList){
-    println("Contributed Repo: " + x.repoName)
+    println( "\n ********* Contributed Repo  ******** \n ")
+    println("Name: " + x.repoName)
+    println("ProgramingLanguages: ")
+    for (lan <- x.languagesConnection.programingLanguages){
+      print(lan.language + " ")
+    }
+  }
+
+  for (x <- UserList){
+    println( "\n ********* My Repo  ******** \n ")
+    println("Name: " + x.repoName)
+    println("ProgramingLanguages: ")
+    for (lan <- x.languagesConnection.programingLanguages){
+      println(lan.language)
+    }
   }
 
 }
