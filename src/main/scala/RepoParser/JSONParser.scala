@@ -70,7 +70,22 @@ object JSONParser {
                     collaboratorsConnection: CollaboratorsConnection,
                     pullRequestsConnection: PullRequestsConnection,
                     commitComments: Forks
-                  )
+                  ){
+
+    //Traverse through collaborator connections to get list of collaborators
+    def getCollaboratorsList(): List[Collaborators] = {
+      val collaboratorList: List[Collaborators] = List()
+
+      val c = this.collaboratorsConnection
+
+      for (e <- c.collaborators){
+        collaboratorList.appended(e)
+      }
+      collaboratorList
+
+    }
+
+                    }
 
   case class RepositoriesConnections (Repo: Seq[Repo])
 
@@ -138,19 +153,5 @@ object JSONParser {
     //Gets list of jacob's own repos.
     p.data.user.RepositoriesConnections.Repo//.RepositoriesConnections.Repo
   }
-
-  //Traverse through collaborator connections to get list of collaborators
-  def getCollaboratorsList(repo:Repo): List[Collaborators] = {
-    val collaboratorList: List[Collaborators] = List()
-
-    val c = repo.collaboratorsConnection
-
-    for (e <- c.collaborators){
-      collaboratorList.appended(e)
-    }
-    collaboratorList
-
-  }
-
 
 }
