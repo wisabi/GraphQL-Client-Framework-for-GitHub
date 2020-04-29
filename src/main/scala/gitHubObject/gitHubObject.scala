@@ -59,6 +59,7 @@ case class GHQLResponse(httpUriRequest:HttpPost,closeable_connection:CloseableHt
       "   \"operationName\": \"ObtainRepos\",  " +
       "   \"variables\":  { \"allRepos\": true } " +
       "}" )
+    println(gqlReq)
     httpUriRequest.setEntity(gqlReq)
     val response = closeable_connection.execute(httpUriRequest)
     response.getEntity match {
