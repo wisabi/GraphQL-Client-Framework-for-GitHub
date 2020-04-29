@@ -18,7 +18,7 @@ object Main extends App {
   val githubObject = (new Github).withAuthCode(client_data.GetAuthCodeFromConfig()).build
 
 
-  val list: Option[List[Repo]] = githubObject.flatMap(GithubQuery[QueryInfo]().withQueryType(MyRepos).withFilter(RepoFilters.includeLanguages(List(Java,Scala))).build)
+  val list: Option[Seq[Repo]] = githubObject.flatMap(GithubQuery[QueryInfo]().withQueryType(MyRepos).withFilter(RepoFilters.includeLanguages(List(Java,Scala))).build)
   val list2 = githubObject.flatMap(function.build)
 
   val realList = list.get
