@@ -37,13 +37,8 @@ object RequestType extends Enumeration {
                           "     pullRequestsList: nodes"+
                           "     {"+
                           "       title"+
-                          "       author{ userLogin: login }"+
-                          "       createdDate: createdAt"+
-                          "       filesConnection: files(first:20){"+
-                          "         files: nodes{"+
-                          "           path"+
-                          "         }"+
-                          "       }"+
+                          "       author{ userLogin: login }" +
+                          "       createdDate: createdAt" +
                           "     }"+
                           "   }"+
                           "   commitComments{"+
@@ -65,6 +60,12 @@ object RequestType extends Enumeration {
     "   \"operationName\": \"ObtainRepos\",  " +
     "   \"variables\":  { \"allRepos\": true } " +
     "}"
+
+      "       filesConnection: files(first:20){"+
+                          "         files: nodes{"+
+                          "           path"+
+                          "         }"+
+                          "       }"+
 */
 
 }

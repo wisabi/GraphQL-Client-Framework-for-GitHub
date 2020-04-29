@@ -1,7 +1,7 @@
 package Queries
 
 import Queries.QueryInfo.Request
-import RepoParser.JSONParser.ListOfRepos
+import RepoParser.JSONParser.Repo
 import RepoParser.JSONParser
 import RequestType.MyRepos
 import RequestType.SpecificUser
@@ -17,25 +17,25 @@ object QueryInfo {
   type EssentialInfo = QueryType
 }
 
-case class GithubQuery [I <: QueryInfo ](queryType: RequestType.QueryRequest = MyRepos, userLogin: String = "",filterFunctions: List[ListOfRepos => Boolean] = List() ){
+case class GithubQuery [I <: QueryInfo ](queryType: RequestType.QueryRequest = MyRepos, userLogin: String = "",filterFunctions: List[Repo => Boolean] = List() ){
 
   def withQueryType (queryType: RequestType.QueryRequest) :  GithubQuery[I with QueryInfo.QueryType] =
     this.copy(queryType = queryType)
 
-  def withFilter(f: ListOfRepos => Boolean): GithubQuery[I] = //not strictly needed so no trait to attach
+  def withFilter(f: Repo => Boolean): GithubQuery[I] = //not strictly needed so no trait to attach
     this.copy(filterFunctions = filterFunctions ++ List(f) )
 
   def withSpecificUser(userLogin: String): GithubQuery[I] = //not strictly needed so no trait to attach
     this.copy(userLogin = userLogin)
 
-  def build(implicit ev : I =:= QueryInfo.EssentialInfo) : GHQLResponse => Option[List[ListOfRepos]] = {
+  def build(implicit ev : I =:= QueryInfo.EssentialInfo) : GHQLResponse => Option[Seq[Repo]] = {
 
     //function to return to flatMap
-    def GenerateList(Q: Query)(gitHub: GHQLResponse): Option[List[ListOfRepos]] = {
+    def GenerateList(Q: Query)(gitHub: GHQLResponse): Option[Seq[Repo]] = {
       val json = gitHub.setAndGet(Q.query)
       //TODO: if bad credentials, assert that config file bad key
       //TODO: if query failed, assert that userLogin invalid * every other query works. However, still weak relation *
-      val RepoList = JSONParser.getRepoList(json)
+      val RepoList = JSONParser.getUserOwnRepo(json)
       /* filter part */
       var currentSate = RepoList
       for (function <- Q.filterFunctions){
@@ -56,4 +56,4 @@ case class GithubQuery [I <: QueryInfo ](queryType: RequestType.QueryRequest = M
   }
 }
 
-case class Query(query: String = "", filterFunctions: List[ListOfRepos => Boolean] = List())
+case class Query(query: String = "", filterFunctions: List[Repo => Boolean] = List())
