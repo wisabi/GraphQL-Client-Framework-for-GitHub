@@ -12,19 +12,26 @@ import ProgramingLanguages.{Java, Scala, HTML, CSS, CPP, Python, JavaScript, All
 import scala.io.Source.fromInputStream
 
 object Main extends App {
-
-
-  val function = GithubQuery[QueryInfo]().withQueryType(MyRepos).withFilter(RepoFilters.includeLanguages(List(Java,Scala)))
+  //github.graphQL connection
   val githubObject = (new Github).withAuthCode(client_data.GetAuthCodeFromConfig()).build
 
 
-  val list: Option[Seq[Repo]] = githubObject.flatMap(GithubQuery[QueryInfo]().withQueryType(MyRepos).withFilter(RepoFilters.includeLanguages(List(Java,Scala))).build)
-  val list2 = githubObject.flatMap(function.build)
+  val MyRepoQuery = GithubQuery[QueryInfo]().withQueryType(MyRepos).withFilter(RepoFilters.includeLanguages(List(Python)))
+  val myContributedToReposQuery = GithubQuery[QueryInfo]().withQueryType(MyContributedToRepos).withFilter(RepoFilters.includeLanguages(List(Java,Scala)))
 
-  val realList = list.get
-  val newkh = realList.filter(RepoFilters.MaxPulls(10))
-  for (x <- realList){
-    println(x.repoName)
+  val MyReposList = githubObject.flatMap(MyRepoQuery.build)
+  val MyContributedToList = githubObject.flatMap(myContributedToReposQuery.build)
+
+  val ReposList = MyReposList.get
+  val ContributedReposList = MyContributedToList.get
+
+
+  for (x <- ReposList){
+    println( "My Repo: " + x.repoName)
+  }
+
+  for (x <- ContributedReposList){
+    println("Contributed Repo: " + x.repoName)
   }
 
 }

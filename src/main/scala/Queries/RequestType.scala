@@ -46,7 +46,7 @@ object RequestType extends Enumeration {
                           "   }"+
                           "}"
 
-  val MyRepos: RequestType.QueryRequest = Value(               "{ \"query\": \"query { viewer{ RepositoriesConnections: repositories(first: 100){ " + RepoInfo + " } } } \" }")
+  val MyRepos: RequestType.QueryRequest = Value(               "{ \"query\": \"{ viewer{ RepositoriesConnections: repositories(first: 100){ " + RepoInfo + " } } } \" }")
 
   val MyContributedToRepos: RequestType.QueryRequest = Value(  "{ \"query\": \"query { viewer{ RepositoriesConnections: repositoriesContributedTo(first: 100){ " + RepoInfo + " } } } \" }")
 
