@@ -35,25 +35,36 @@ case class GithubQuery [I <: QueryInfo ](queryType: RequestType.QueryRequest = M
       val json = gitHub.setAndGet(Q.query)
       //TODO: if bad credentials, assert that config file bad key
       //TODO: if query failed, assert that userLogin invalid * every other query works. However, still weak relation *
-      val RepoList = JSONParser.getUserOwnRepo(json)
-      /* filter part */
-      var currentSate = RepoList
-      for (function <- Q.filterFunctions){
-        currentSate = currentSate.filter(function)
+      if (Q.queryType == SpecificUser) {
+        val RepoList = JSONParser.getSpecificUserRepo(json)
+        /* filter part */
+        var currentSate = RepoList
+        for (function <- Q.filterFunctions) {
+          currentSate = currentSate.filter(function)
+        }
+        Some(currentSate)
       }
-      Some(currentSate)
+      else {
+        val RepoList = JSONParser.getUserOwnRepo(json)
+        /* filter part */
+        var currentSate = RepoList
+        for (function <- Q.filterFunctions) {
+          currentSate = currentSate.filter(function)
+        }
+        Some(currentSate)
+      }
     }
 
     //modify query if needed
     queryType match {
       case SpecificUser => if (userLogin.equals(""))
-                              GenerateList(Query(MyRepos.toString, filterFunctions))
+                              GenerateList(Query(MyRepos.toString, filterFunctions, MyRepos))
                            else //TODO: userLogin may not be a valid github user, client dependent
-                              GenerateList(Query(queryType.toString + userLogin + "\"} }", filterFunctions))
-      case MyRepos =>  GenerateList(Query(queryType.toString, filterFunctions))
-      case MyContributedToRepos =>  GenerateList(Query(queryType.toString, filterFunctions))
+                              GenerateList(Query(queryType.toString + userLogin + "\"} }", filterFunctions, SpecificUser))
+      case MyRepos =>  GenerateList(Query(queryType.toString, filterFunctions, MyRepos))
+      case MyContributedToRepos =>  GenerateList(Query(queryType.toString, filterFunctions, MyContributedToRepos))
     }
   }
 }
 
-case class Query(query: String = "", filterFunctions: List[Repo => Boolean] = List())
+case class Query(query: String = "", filterFunctions: List[Repo => Boolean] = List(), queryType: RequestType.QueryRequest)

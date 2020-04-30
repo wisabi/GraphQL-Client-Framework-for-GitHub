@@ -15,19 +15,19 @@ object Main extends App {
   //github.graphQL connection
   val githubObject = (new Github).withAuthCode(client_data.GetAuthCodeFromConfig()).build
 
-  val MyRepoQuery = GithubQuery[QueryInfo]().withQueryType(MyRepos)
-  val myContributedToReposQuery = GithubQuery[QueryInfo]().withQueryType(MyContributedToRepos)
+  //val MyRepoQuery = GithubQuery[QueryInfo]().withQueryType(MyRepos)
+  //val myContributedToReposQuery = GithubQuery[QueryInfo]().withQueryType(MyContributedToRepos)
   val SpecificUserQuery = GithubQuery[QueryInfo]().withQueryType(SpecificUser).withSpecificUser("wisabi")
 
-  val MyReposList = githubObject.flatMap(MyRepoQuery.build)
-  val MyContributedToList = githubObject.flatMap(myContributedToReposQuery.build)
+  //val MyReposList = githubObject.flatMap(MyRepoQuery.build)
+  //val MyContributedToList = githubObject.flatMap(myContributedToReposQuery.build)
   val SpecificUserList = githubObject.flatMap(SpecificUserQuery.build)
 
-  val ReposList = MyReposList.get
-  val ContributedReposList = MyContributedToList.get
+  //val ReposList = MyReposList.get
+  //val ContributedReposList = MyContributedToList.get
   val UserList = SpecificUserList.get
 
-
+/*
   println( "\n ----------------------- MyRepos  ----------------------- \n ")
   for (x <- ReposList){
     println("\n\nName: " + x.repoName)
@@ -44,7 +44,7 @@ object Main extends App {
     for (lan <- x.languagesConnection.programingLanguages){
       print(lan.language + " ")
     }
-  }
+  }*/
 
   println( "\n ----------------------- User  ----------------------- \n ")
   for (x <- UserList){

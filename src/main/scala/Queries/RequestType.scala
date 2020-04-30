@@ -2,6 +2,43 @@ package Queries
 
 object RequestType extends Enumeration {
   type QueryRequest = Value
+  val RepoInfo_NoCollaborators: String ="Repo: nodes{" +
+                                        "   repoName: name"+
+                                        "   nameWithOwner"+
+                                        "   createdDate: createdAt"+
+                                        "   lastPushed: pushedAt"+
+                                        "   description"+
+                                        "   primaryLanguage{"+
+                                        "     language: name"+
+                                        "   }"+
+                                        "   owner{"+
+                                        "     loginName: login"+
+                                        "   }"+
+                                        "   forks{"+
+                                        "     totalCount"+
+                                        "   }"+
+                                        "   languagesConnection: languages(first: 25){"+
+                                        "     programingLanguages: nodes{"+
+                                        "       language: name"+
+                                        "     }"+
+                                        "   }"+
+                                        "   stargazersConnection: stargazers{"+
+                                        "     totalCount"+
+                                        "   }"+
+                                        "   pullRequestsConnection: pullRequests(last: 10){"+
+                                        "     totalCount"+
+                                        "     pullRequestsList: nodes"+
+                                        "     {"+
+                                        "       title"+
+                                        "       author{ userLogin: login }" +
+                                        "       createdDate: createdAt" +
+                                        "     }"+
+                                        "   }"+
+                                        "   commitComments{"+
+                                        "     totalCount"+
+                                        "   }"+
+                                        "}"
+
   val RepoInfo: String =  "Repo: nodes{" +
                           "   repoName: name"+
                           "   nameWithOwner"+
@@ -50,7 +87,7 @@ object RequestType extends Enumeration {
 
   val MyContributedToRepos: RequestType.QueryRequest = Value(  "{ \"query\": \"query { viewer{ RepositoriesConnections: repositoriesContributedTo(first: 100){ " + RepoInfo + " } } } \" }")
 
-  val SpecificUser: RequestType.QueryRequest = Value(           "{ \"query\": \"query SpecificUser($user: String!){ user(login: $user){ RepositoriesConnections: repositories(first: 100){" + RepoInfo + " } } } \"," +
+  val SpecificUser: RequestType.QueryRequest = Value(           "{ \"query\": \"query SpecificUser($user: String!){ user(login: $user){ RepositoriesConnections: repositories(first: 100){" + RepoInfo_NoCollaborators + " } } } \"," +
                                                                 "  \"operationName\": \"SpecificUser\", " +
                                                                 "  \"variables\": { \"user\": \"" ) // + userLogin + "\"} }"
 
