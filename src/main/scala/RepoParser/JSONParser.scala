@@ -7,7 +7,7 @@ import scala.annotation.tailrec
 object JSONParser {
 
 //
-  case class R00tJsonObject(data: Data)
+ // case class R00tJsonObject(data: Data)
 //
 //  case class Repo(
 //                   Owner_and_Repo: String,
@@ -45,7 +45,7 @@ object JSONParser {
   case class CollaboratorsConnection (totalCount: Int,collaborators: Seq[Collaborators])
 
   case class Data (viewer: Viewer, user: User)///////////////////////////
-  //case class Data (user: User)
+  //case class Data (user: User)/////
 
   case class Forks (totalCount: Int)
 
@@ -67,7 +67,7 @@ object JSONParser {
                     forks: Forks,
                     languagesConnection: LanguagesConnection,
                     stargazersConnection: Forks,
-                    collaboratorsConnection: CollaboratorsConnection,
+                    collaboratorsConnection: Option[CollaboratorsConnection], ///<-----changed this to option
                     pullRequestsConnection: PullRequestsConnection,
                     commitComments: Forks
                   ){
@@ -78,7 +78,7 @@ object JSONParser {
 
       val c = this.collaboratorsConnection
 
-      for (e <- c.collaborators){
+      for (e <- c.get.collaborators){  //<---because option, added get
         collaboratorList.appended(e)
       }
       collaboratorList
