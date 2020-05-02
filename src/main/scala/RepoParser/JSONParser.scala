@@ -73,16 +73,14 @@ object JSONParser {
                   ){
 
     //Traverse through collaborator connections to get list of collaborators
-    def getCollaboratorsList(): List[Collaborators] = {
-      val collaboratorList: List[Collaborators] = List()
-
-      val c = this.collaboratorsConnection
-
-      for (e <- c.get.collaborators){  //<---because option, added get
-        collaboratorList.appended(e)
-      }
-      collaboratorList
-
+    def getCollaborators(): List[Collaborators] = {
+      this.collaboratorsConnection.get.collaborators.toList
+    }
+    def getPullRequest(): List[PullRequestsList] = {
+      this.pullRequestsConnection.pullRequestsList.toList
+    }
+    def getLanguages(): List[PrimaryLanguage] = {
+      this.languagesConnection.programingLanguages.toList
     }
 
                     }

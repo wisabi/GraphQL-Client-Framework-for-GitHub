@@ -15,21 +15,24 @@ object Main extends App {
   //github.graphQL connection
   val githubObject = (new Github).withAuthCode(client_data.GetAuthCodeFromConfig()).build
 
-  //val MyRepoQuery = GithubQuery[QueryInfo]().withQueryType(MyRepos)
-  //val myContributedToReposQuery = GithubQuery[QueryInfo]().withQueryType(MyContributedToRepos)
-  val SpecificUserQuery = GithubQuery[QueryInfo]().withQueryType(SpecificUser).withSpecificUser("wisabi")
+  val MyRepoQuery = GithubQuery[QueryInfo]().withQueryType(MyRepos)
+  val myContributedToReposQuery = GithubQuery[QueryInfo]().withQueryType(MyContributedToRepos)
+  //val SpecificUserQuery = GithubQuery[QueryInfo]().withQueryType(SpecificUser).withSpecificUser("wisabi")
 
-  //val MyReposList = githubObject.flatMap(MyRepoQuery.build)
-  //val MyContributedToList = githubObject.flatMap(myContributedToReposQuery.build)
-  val SpecificUserList = githubObject.flatMap(SpecificUserQuery.build)
+  val MyReposList = githubObject.flatMap(MyRepoQuery.build)
+  val MyContributedToList = githubObject.flatMap(myContributedToReposQuery.build)
+  //val SpecificUserList = githubObject.flatMap(SpecificUserQuery.build)
 
-  //val ReposList = MyReposList.get
-  //val ContributedReposList = MyContributedToList.get
-  val UserList = SpecificUserList.get
+  val ReposList = MyReposList.get
+  val ContributedReposList = MyContributedToList.get
+  //val UserList = SpecificUserList.get
 
-/*
+
   println( "\n ----------------------- MyRepos  ----------------------- \n ")
   for (x <- ReposList){
+    print(x.getCollaborators())
+    println(x.getPullRequest())
+    println(x.getLanguages())
     println("\n\nName: " + x.repoName)
     println("ProgramingLanguages: ")
     for (lan <- x.languagesConnection.programingLanguages){
@@ -39,14 +42,18 @@ object Main extends App {
 
   println( "\n ----------------------- Contributed  ----------------------- \n ")
   for (x <- ContributedReposList){
+    print(x.getCollaborators())
+    println(x.getPullRequest())
+    println(x.getLanguages())
     println("\n\nName: " + x.repoName)
     println("ProgramingLanguages: ")
     for (lan <- x.languagesConnection.programingLanguages){
       print(lan.language + " ")
     }
-  }*/
+  }
 
   println( "\n ----------------------- User  ----------------------- \n ")
+  /*
   for (x <- UserList){
     println("\n\nName: " + x.repoName)
     println("ProgramingLanguages: ")
@@ -54,5 +61,5 @@ object Main extends App {
       println(lan.language)
     }
   }
-
+  */
 }
