@@ -37,7 +37,7 @@ case class Github[I <: gitHubObject](key:String = ""){
 
   def build(implicit ev: I =:= gitHubObject.MandatoryInfo): Option[GHQLResponse] = {
 
-    val closeable_connection: CloseableHttpClient = HttpClientBuilder.create.build
+    //val closeable_connection: CloseableHttpClient = HttpClientBuilder.create.build
 
     val httpUriRequest = new HttpPost(gitHubObject.BASE_GHQL_URL)
     /// gqlReq => function to set any entity based on given (String)
@@ -47,13 +47,15 @@ case class Github[I <: gitHubObject](key:String = ""){
       httpUriRequest.addHeader("Authorization", "Bearer " + key)
       httpUriRequest.addHeader("Accept", "application/json")
 
-    Some(GHQLResponse(httpUriRequest,closeable_connection))
+    //Some(GHQLResponse(httpUriRequest,closeable_connection))
+    Some(GHQLResponse(httpUriRequest))
   }
 
   //Build entire object for user with all mandatory info
 }
-case class GHQLResponse(httpUriRequest:HttpPost,closeable_connection:CloseableHttpClient){
+case class GHQLResponse(httpUriRequest:HttpPost){
   def setAndGet(str: String): String = {
+    val closeable_connection: CloseableHttpClient = HttpClientBuilder.create.build
     httpUriRequest.setEntity(new StringEntity(str))
     val response = closeable_connection.execute(httpUriRequest)
     response.getEntity match {
@@ -68,9 +70,5 @@ case class GHQLResponse(httpUriRequest:HttpPost,closeable_connection:CloseableHt
       }
 
     }
-  }
-
-  def getData: Option[CloseableHttpResponse] = {
-    Some(closeable_connection.execute(httpUriRequest)) //CloseableHttpResponse
   }
 }
