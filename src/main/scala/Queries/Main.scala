@@ -13,19 +13,20 @@ import scala.io.Source.fromInputStream
 
 object Main extends App {
   //github.graphQL connection
-  val githubObject = (new Github).withAuthCode(client_data.GetAuthCodeFromConfig()).build
+  val githubObject = (new Github).withAuthCode(client_data.GetAuthCodeFromConfig()).build //Specific user object
+
 
   val MyRepoQuery = GithubQuery[QueryInfo]().withQueryType(MyRepos)
   val myContributedToReposQuery = GithubQuery[QueryInfo]().withQueryType(MyContributedToRepos)
-  //val SpecificUserQuery = GithubQuery[QueryInfo]().withQueryType(SpecificUser).withSpecificUser("wisabi")
+  val SpecificUserQuery = GithubQuery[QueryInfo]().withQueryType(SpecificUser).withSpecificUser("wisabi")
 
   val MyReposList = githubObject.flatMap(MyRepoQuery.build)
   val MyContributedToList = githubObject.flatMap(myContributedToReposQuery.build)
-  //val SpecificUserList = githubObject.flatMap(SpecificUserQuery.build)
+  val SpecificUserList = githubObject.flatMap(SpecificUserQuery.build)
 
   val ReposList = MyReposList.get
   val ContributedReposList = MyContributedToList.get
-  //val UserList = SpecificUserList.get
+  val UserList = SpecificUserList.get
 
 
   println( "\n ----------------------- MyRepos  ----------------------- \n ")
@@ -53,7 +54,7 @@ object Main extends App {
   }
 
   println( "\n ----------------------- User  ----------------------- \n ")
-  /*
+
   for (x <- UserList){
     println("\n\nName: " + x.repoName)
     println("ProgramingLanguages: ")
@@ -61,5 +62,5 @@ object Main extends App {
       println(lan.language)
     }
   }
-  */
+
 }
