@@ -79,8 +79,10 @@ object JSONParser {
     def getPullRequest(): List[PullRequestsList] = {
       this.pullRequestsConnection.pullRequestsList.toList
     }
-    def getLanguages(): List[PrimaryLanguage] = {
-      this.languagesConnection.programingLanguages.toList
+    def getLanguages(): List[String] = {
+      val list = this.languagesConnection.programingLanguages.toList
+      val l = list.map(a => a.language)
+      l
     }
 
                     }
