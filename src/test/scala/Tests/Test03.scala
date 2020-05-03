@@ -1,15 +1,16 @@
 package Tests
 
+import Queries.Main.{MyRepoQuery, MyReposList, githubObject}
 import Queries.RequestType.MyRepos
 import Queries.{GithubQuery, QueryInfo, RequestType}
+import RepoParser.JSONParser
 import gitHubObject.{GHQLResponse, Github, client_data, gitHubObject}
+import jdk.nashorn.internal.parser.JSONParser
 import org.scalatest.FunSuite
-
+import org.scalatest.Matchers._
+import RepoParser.JSONParser.Repo
 class Test03 extends FunSuite{
   val githubObject: Option[GHQLResponse] = new Github[gitHubObject]().withAuthCode(client_data.GetAuthCodeFromConfig()).build
-
-
-
 
   val other_githubObject: Option[GHQLResponse] = new Github[gitHubObject]().withAuthCode(client_data.GetAuthCodeFromConfig()).build
 
@@ -18,6 +19,7 @@ class Test03 extends FunSuite{
 
   }
   test("Test githubObjects are created and distinct"){
+
     assert(githubObject != other_githubObject)
   }
 
@@ -25,7 +27,21 @@ class Test03 extends FunSuite{
     assert(client_data.GetAuthCodeFromConfig() == "d3e85d5ac6352005b5e708020a09eb08aa7dd6ed")
   }
 
-  test(""){
-    //assert(githubObject.get.setAndGet(MyRepos.toString) should be)
+  test("Get Languages returns valid language per Repo"){
+
+
+    val MyRepoQuery = GithubQuery[QueryInfo]().withQueryType(MyRepos)
+    val MyReposList = githubObject.flatMap(MyRepoQuery.build)
+    val ReposList = MyReposList.get
+
+    val test = List("Ruby", "JavaScript", "CSS")
+    val actual = ReposList(0).getLanguages
+
+
+
+    assert(actual == test)
+
+
   }
+
 }
