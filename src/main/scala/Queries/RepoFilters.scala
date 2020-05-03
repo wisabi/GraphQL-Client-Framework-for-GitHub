@@ -8,28 +8,27 @@ import RepoParser.JSONParser
 
 object RepoFilters {
 
-  def includeLanguages (languages: List[ProgramingLanguages.Value]) (Repo: Repo) : Boolean = {
-    for (language <- languages){
-      if (Repo.languagesConnection.programingLanguages.contains(PrimaryLanguage(language.toString)))
-        true
-    }
+  def includeLanguages (languages: List[ProgramingLanguages.Language]) (repo: Repo) : Boolean = {
+    val Languages: Seq[String] = repo.languagesConnection.programingLanguages.map(x => x.language)
+    println(Languages)
+    languages.foreach(l => if (Languages.contains(l.toString)) true)
     false
   }
 
-  def MinimumPulls (Amount: Double) (Repo: Repo) : Boolean = {
+  def MinimumPulls (Amount: Int) (Repo: Repo) : Boolean = {
     Repo.pullRequestsConnection.totalCount >= Amount
   }
 
-  def MaxPulls (Amount: Double) (Repo: Repo) : Boolean = {
+  def MaxPulls (Amount: Int) (Repo: Repo) : Boolean = {
     Repo.pullRequestsConnection.totalCount <= Amount
   }
 
 
-  def MinimumForks (Amount: Double) (Repo: Repo) : Boolean = {
+  def MinimumForks (Amount: Int) (Repo: Repo) : Boolean = {
     Repo.forks.totalCount >= Amount
   }
 
-  def MaxForks (Amount: Double) (Repo: Repo) : Boolean = {
+  def MaxForks (Amount: Int) (Repo: Repo) : Boolean = {
     Repo.forks.totalCount <= Amount
   }
 

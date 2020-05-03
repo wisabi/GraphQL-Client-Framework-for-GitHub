@@ -1,7 +1,8 @@
 package Tests
 /* testing tool libraries */
+import Queries.RepoFilters
 import RepoParser.JSONParser.{Author, Collaborators, CollaboratorsConnection, Forks, LanguagesConnection, Owner, PrimaryLanguage, PullRequestsConnection, PullRequestsList, Repo}
-import gitHubObject.{Github, client_data}
+import Queries.ProgramingLanguages.{Scala, Java, Python, CPP}
 import org.scalatest._
 import org.scalatest.Matchers._
 
@@ -48,8 +49,10 @@ class FilterTest extends FunSuite {
     }
   }*/
 
+  //TODO: fix
   test("includeLanguages filter test"){
-
+    val RepoFilter = RepoSeq.filter(RepoFilters.includeLanguages(List(Scala)))
+    (RepoFilter.length) should be (3)
   }
 
   test("MinimumPulls filter test"){
