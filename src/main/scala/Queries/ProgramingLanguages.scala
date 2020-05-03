@@ -9,5 +9,5 @@ object ProgramingLanguages extends Enumeration {
   val HTML: ProgramingLanguages.Language= Value("HTML")
   val JavaScript: ProgramingLanguages.Language = Value("JavaScript")
   val Python: ProgramingLanguages.Language = Value("Python")
-  val CPP: ProgramingLanguages.Language = Value("C++")
+  val CPP: ProgramingLanguages.Language = Value("CPP")
 }
