@@ -1,6 +1,5 @@
 package Tests
 
-
 import Queries.{GithubQuery, QueryInfo}
 import Queries.RequestType.{MyContributedToRepos, MyRepos, SpecificUser}
 import RepoParser.JSONParser.Repo
@@ -11,7 +10,7 @@ import org.scalatest._
 import org.scalatest.Matchers._
 
 
-class Test02 extends FunSuite{
+class QueriesTest extends FunSuite{
   private val gitHub = (new Github).withAuthCode(client_data.GetAuthCodeFromConfig()).build
 
   /****************************************************************************************************
@@ -45,9 +44,4 @@ class Test02 extends FunSuite{
     OptionReposList shouldBe a [Some[_]]
     ReposList shouldBe a [Seq[Repo]]
   }
-
-  /****************************************************************************************************
-                          Testing Filters
-   *****************************************************************************************************/
-
 }
