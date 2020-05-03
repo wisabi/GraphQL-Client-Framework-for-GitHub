@@ -1,5 +1,4 @@
 package Tests
-
 import RepoParser.JSONParser
 import com.typesafe.config.{Config, ConfigFactory}
 import org.scalatest.FunSuite
@@ -34,8 +33,6 @@ class JSONParserTest extends FunSuite {
       assert(seq(23).description === "Programming Languages and Environment (U. of Illinois, Chicago)")
     }
 
-
-
     test("Test Contributed to Repo Owner") {
       val seq = JSONParser.getUserOwnRepo(ContributedToString)
       assert(seq(0).owner.loginName === "EmilioAVazquez")
@@ -51,32 +48,29 @@ class JSONParserTest extends FunSuite {
       assert(seq(0).createdDate === "2019-08-20T22:25:14Z")
     }
 
+    test("Test Specific User Owner") {
+      val seq = JSONParser.getSpecificUserRepo(SpecificUserRepoString)
+      assert(seq(0).owner.loginName === "wisabi")
+    }
 
+    test("Test Specific User Repo Name") {
+      val seq = JSONParser.getSpecificUserRepo(SpecificUserRepoString)
+      assert(seq(14).repoName === "IntelliJDesignPatternPlugin")
+    }
 
-  test("Test Specific User Owner") {
-    val seq = JSONParser.getSpecificUserRepo(SpecificUserRepoString)
-    assert(seq(0).owner.loginName === "wisabi")
-  }
+    test("Test Specific User Repo Created Date") {
+      val seq = JSONParser.getSpecificUserRepo(SpecificUserRepoString)
+      assert(seq(14).createdDate === "2020-04-22T20:12:37Z")
+    }
 
-  test("Test Specific User Repo Name") {
-    val seq = JSONParser.getSpecificUserRepo(SpecificUserRepoString)
-    assert(seq(14).repoName === "IntelliJDesignPatternPlugin")
-  }
+    test("Test Specific User Repo Last Pushed Date") {
+      val seq = JSONParser.getSpecificUserRepo(SpecificUserRepoString)
+      assert(seq(14).lastPushed === "2020-04-23T19:22:57Z")
+    }
 
-  test("Test Specific User Repo Created Date") {
-    val seq = JSONParser.getSpecificUserRepo(SpecificUserRepoString)
-    assert(seq(14).createdDate === "2020-04-22T20:12:37Z")
-  }
-
-  test("Test Specific User Repo Last Pushed Date") {
-    val seq = JSONParser.getSpecificUserRepo(SpecificUserRepoString)
-    assert(seq(14).lastPushed === "2020-04-23T19:22:57Z")
-  }
-
-
-  test("Test Specific User Repo Primary Language") {
-    val seq = JSONParser.getSpecificUserRepo(SpecificUserRepoString)
-    assert(seq(14).primaryLanguage.language === "Java")
-  }
+    test("Test Specific User Repo Primary Language") {
+      val seq = JSONParser.getSpecificUserRepo(SpecificUserRepoString)
+      assert(seq(14).primaryLanguage.language === "Java")
+    }
 }
 
