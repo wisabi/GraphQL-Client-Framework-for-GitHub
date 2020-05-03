@@ -1,9 +1,14 @@
 package RepoParser
 import org.json4s.DefaultFormats
 import org.json4s.jackson.JsonMethods.parse
+import org.slf4j.LoggerFactory
+import com.typesafe.scalalogging.Logger
 
 object JSONParser {
 
+  //Getting logger.
+  val logger: Logger = Logger(LoggerFactory.getLogger("JSONParser"))
+  logger.trace("Executing: JSONParser object")
 
   /****************************************************************************************************
                          Case classes for JSON entries
@@ -55,22 +60,27 @@ object JSONParser {
     //Traverse through collaborator connections to get list of collaborators
     def getCollaborators: List[Collaborators] = {
       //TODO: if none
+      logger.trace("Executing: getCollaborators")
       this.collaboratorsConnection.get.collaborators.toList
     }
     def getPullRequest: List[PullRequestsList] = {
+      logger.trace("Executing: getPullRequest")
       this.pullRequestsConnection.pullRequestsList.toList
     }
     def getLanguages: List[String] = {
+      logger.trace("Executing: getLanguages")
       this.languagesConnection.programingLanguages.toList.map(a => a.language)
     }
     def getStarGazersCount: Int = {
+      logger.trace("Executing: getStarGazersCount")
       this.stargazersConnection.totalCount
     }
     def getCommitCommentsCount: Int = {
+      logger.trace("Executing: getCommitCommentsCount")
       this.commitComments.totalCount
     }
     def getRepoInfo: Unit = {
-
+      logger.trace("Executing: getRepoInfo")
       println("repoName: " + this.repoName + "\nnameWithOwner: " + this.nameWithOwner + "\ncreatedDate: " + this.createdDate + "\nlastPushed: " + this.lastPushed
       + "\ndescription: " + this.description + "\nprimaryLanguage: " + this.primaryLanguage.language + "\nowner: " + this.owner.loginName + "\nforks: "
       + this.forks + "\nlanguages: " + getLanguages + "\nstargazers: " + getStarGazersCount
@@ -86,28 +96,39 @@ object JSONParser {
 
   //Input JSON string, outputs list of repos.
   def getUserOwnRepo(string: String): Seq[Repo] = {
-    //print("asdfasdjfklasdjfklasj")
-    //Parse JSON
+    logger.trace("Executing: getUserOwnRepo")
+
     implicit val formats = DefaultFormats
+
+    //Parse JSON
+    logger.trace("Parsing JSON string")
     val jsValue = parse(string)
 
     //Builds a tree of the JSON and parses it into R00tJsonObject class.
+    logger.trace("Building JSON Tree into case class objects")
     val p = jsValue.extract[RootInterface]
 
     //Gets list of jacob's own repos.
+    logger.trace("Returning list of own repos.")
     p.data.viewer.RepositoriesConnections.Repo
   }
 
   //Input JSON string, outputs list of repos.
   def getSpecificUserRepo(string: String): Seq[Repo]= {
-    //Parse JSON
+    logger.trace("Executing: getSpecificUserRepo")
+
     implicit val formats = DefaultFormats
+
+    //Parse JSON
+    logger.trace("Parsing JSON string")
     val jsValue = parse(string)
 
     //Builds a tree of the JSON and parses it into R00tJsonObject class.
+    logger.trace("Building JSON Tree into case class objects")
     val p = jsValue.extract[RootInterface]
 
     //Gets list of jacob's own repos.
+    logger.trace("Returning list of user repos.")
     p.data.user.RepositoriesConnections.Repo//.RepositoriesConnections.Repo
   }
 }
