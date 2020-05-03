@@ -10,7 +10,9 @@ object RepoFilters {
 
   def includeLanguages (languages: List[ProgramingLanguages.Language]) (repo: Repo) : Boolean = {
     val Languages: Seq[String] = repo.languagesConnection.programingLanguages.map(x => x.language)
-    println(Languages)
+    val Languages2: Seq[String] = languages.map(x => x.toString)
+    println("Languages In repo " + Languages)
+    println("Languages In include " + Languages)
     languages.foreach(l => if (Languages.contains(l.toString)) true)
     false
   }
