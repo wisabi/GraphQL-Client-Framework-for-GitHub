@@ -13,8 +13,9 @@ object RepoFilters {
     val Languages2: Seq[String] = languages.map(x => x.toString)
     println("Languages In repo " + Languages)
     println("Languages In include " + Languages)
-    languages.foreach(l => if (Languages.contains(l.toString)) true)
-    false
+    var t = false
+    languages.foreach(l => if (Languages.contains(l.toString)){t = true} )
+    t
   }
 
   def MinimumPulls (Amount: Int) (Repo: Repo) : Boolean = {
