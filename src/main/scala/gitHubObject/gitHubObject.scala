@@ -9,7 +9,8 @@ import scala.concurrent.{ExecutionContext, Future}
 import org.apache.http.client.methods.HttpPost
 import org.apache.http.entity.StringEntity
 import org.apache.http.impl.client.DefaultHttpClient
-
+import org.slf4j.LoggerFactory
+import com.typesafe.scalalogging.Logger
 import scala.io.Source.fromInputStream
 
 sealed trait gitHubObject
@@ -58,17 +59,19 @@ case class GHQLResponse(httpUriRequest:HttpPost){
     val closeable_connection: CloseableHttpClient = HttpClientBuilder.create.build
     httpUriRequest.setEntity(new StringEntity(str))
     val response = closeable_connection.execute(httpUriRequest)
+    val setAndGet = Logger(LoggerFactory.getLogger("logger"))
     response.getEntity match {
-      case null => "Response entity is null"
+      case null => {
+        setAndGet.trace("Sending null data")
+        "Response entity is null"
+      }
       case x if x != null => {
+        setAndGet.trace("Connection built successfully and sending the request!")
         fromInputStream(x.getContent).mkString
-        //val s:String =
-        //println(s)
-        //s
-        //print("respJSON: " + respJson)
-        //println(test)
       }
 
     }
   }
+  val GithubBuilder: Logger = Logger(LoggerFactory.getLogger("logger"))
+  GithubBuilder.trace("Building Github object")
 }

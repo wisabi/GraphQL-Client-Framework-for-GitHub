@@ -3,12 +3,16 @@ package gitHubObject
 import com.typesafe.config.{Config, ConfigFactory}
 import org.apache.http.client.methods.HttpPost
 import org.apache.http.impl.client.{CloseableHttpClient, HttpClientBuilder}
+import org.slf4j.LoggerFactory
+import com.typesafe.scalalogging.Logger
 
 object client_data {
 
  def GetAuthCodeFromConfig(): String = {
+  val configLog = Logger(LoggerFactory.getLogger("logger"))
   val config: Config = ConfigFactory.load("lightbend.conf")
   val key = config.getString("githubAPI.key")
+  configLog.trace("Sending Github Authorization key from Configuration file")
   key
  }
 
