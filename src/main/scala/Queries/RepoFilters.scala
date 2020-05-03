@@ -31,11 +31,11 @@ object RepoFilters {
   }
 
   def NonNullDescriptions(Repo: Repo): Boolean = {
-    !Repo.description.equals("null")
+    !(Repo.description == null)
   }
 
   def NullDescriptions(Repo: Repo): Boolean = {
-    Repo.description.equals("null")
+    Repo.description == null
   }
 
 

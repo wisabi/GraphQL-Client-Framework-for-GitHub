@@ -19,7 +19,7 @@ class FilterTest extends FunSuite {
   private val nameWithOwner =  List("Alex/Repo1", "Wisam/Repo2", "Jacob/Repo3", "Phantom/Repo4")
   private val created = List("2019-02-04T14:46:23Z", "2019-02-05T14:46:23Z", "2019-02-06T14:46:23Z", "2019-02-07T14:46:23Z")
   private val lastPushed = List("2020-02-04T14:46:23Z", "2020-02-05T14:46:23Z", "2020-02-06T14:46:23Z", "2020-02-07T14:46:23Z")
-  private val description = List("API", "framework", "", "null")
+  private val description = List("API", "framework", "work in progress", null)
   private val primaryLanguage = List(PrimaryLanguage("Java"),PrimaryLanguage("Scala"),PrimaryLanguage("Python"),PrimaryLanguage("CPP"))
   private val owner = List(Owner("Alex"),Owner("Wisam"), Owner("Jacob"),Owner("Phantom"))
   private val forks = List(Forks(2), Forks(3),Forks(4),Forks(5))
