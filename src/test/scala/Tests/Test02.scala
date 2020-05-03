@@ -1,23 +1,18 @@
 package Tests
 
 
-import Queries.Main.MyReposList
 import Queries.{GithubQuery, QueryInfo}
 import Queries.RequestType.{MyContributedToRepos, MyRepos, SpecificUser}
 import RepoParser.JSONParser.Repo
 import gitHubObject.{Github, client_data}
 
-//testing libraries
+/* testing tool libraries */
 import org.scalatest._
 import org.scalatest.Matchers._
 
 
 class Test02 extends FunSuite{
   private val gitHub = (new Github).withAuthCode(client_data.GetAuthCodeFromConfig()).build
-
-  test("Example test") {
-    assert(1===1)
-  }
 
   /****************************************************************************************************
                           Testing three supported types of queries
