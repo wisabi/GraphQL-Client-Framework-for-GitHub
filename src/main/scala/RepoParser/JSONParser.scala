@@ -54,6 +54,7 @@ object JSONParser {
 
     //Traverse through collaborator connections to get list of collaborators
     def getCollaborators: List[Collaborators] = {
+      //TODO: if none
       this.collaboratorsConnection.get.collaborators.toList
     }
     def getPullRequest: List[PullRequestsList] = {

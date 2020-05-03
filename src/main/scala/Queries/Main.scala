@@ -28,12 +28,11 @@ object Main extends App {
   val ContributedReposList = MyContributedToList.get
   val UserList = SpecificUserList.get
 
-
   println( "\n ----------------------- MyRepos  ----------------------- \n ")
   for (x <- ReposList){
-    print(x.getCollaborators())
-    println(x.getPullRequest())
-    println(x.getLanguages())
+    print(x.getCollaborators)
+    println(x.getPullRequest)
+    println(x.getLanguages)
     println("\n\nName: " + x.repoName)
     println("ProgramingLanguages: ")
     for (lan <- x.languagesConnection.programingLanguages){
@@ -43,9 +42,9 @@ object Main extends App {
 
   println( "\n ----------------------- Contributed  ----------------------- \n ")
   for (x <- ContributedReposList){
-    print(x.getCollaborators())
-    println(x.getPullRequest())
-    println(x.getLanguages())
+    print(x.getCollaborators)
+    println(x.getPullRequest)
+    println(x.getLanguages)
     println("\n\nName: " + x.repoName)
     println("ProgramingLanguages: ")
     for (lan <- x.languagesConnection.programingLanguages){
