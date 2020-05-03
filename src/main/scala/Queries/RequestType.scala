@@ -90,19 +90,4 @@ object RequestType extends Enumeration {
   val SpecificUser: RequestType.QueryRequest = Value(           "{ \"query\": \"query SpecificUser($user: String!){ user(login: $user){ RepositoriesConnections: repositories(first: 100){" + RepoInfo_NoCollaborators + " } } } \"," +
                                                                 "  \"operationName\": \"SpecificUser\", " +
                                                                 "  \"variables\": { \"user\": \"" ) // + userLogin + "\"} }"
-
-
-/*
-"{  \"query\":      \"" + client_data.repos + "\", " +
-    "   \"operationName\": \"ObtainRepos\",  " +
-    "   \"variables\":  { \"allRepos\": true } " +
-    "}"
-
-      "       filesConnection: files(first:20){"+
-                          "         files: nodes{"+
-                          "           path"+
-                          "         }"+
-                          "       }"+
-*/
-
 }
