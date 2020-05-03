@@ -2,8 +2,6 @@ package RepoParser
 import org.json4s.DefaultFormats
 import org.json4s.jackson.JsonMethods.parse
 
-import scala.annotation.tailrec
-
 object JSONParser {
 
 
