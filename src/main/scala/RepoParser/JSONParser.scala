@@ -53,16 +53,28 @@ object JSONParser {
                   ){
 
     //Traverse through collaborator connections to get list of collaborators
-    def getCollaborators(): List[Collaborators] = {
+    def getCollaborators: List[Collaborators] = {
       this.collaboratorsConnection.get.collaborators.toList
     }
-    def getPullRequest(): List[PullRequestsList] = {
+    def getPullRequest: List[PullRequestsList] = {
       this.pullRequestsConnection.pullRequestsList.toList
     }
-    def getLanguages(): List[String] = {
-      val list = this.languagesConnection.programingLanguages.toList
-      val l = list.map(a => a.language)
-      l
+    def getLanguages: List[String] = {
+      this.languagesConnection.programingLanguages.toList.map(a => a.language)
+    }
+    def getStarGazersCount: Int = {
+      this.stargazersConnection.totalCount
+    }
+    def getCommitCommentsCount: Int = {
+      this.commitComments.totalCount
+    }
+    def getRepoInfo: Unit = {
+
+      println("repoName: " + this.repoName + "\nnameWithOwner: " + this.nameWithOwner + "\ncreatedDate: " + this.createdDate + "\nlastPushed: " + this.lastPushed
+      + "\ndescription: " + this.description + "\nprimaryLanguage: " + this.primaryLanguage.language + "\nowner: " + this.owner.loginName + "\nforks: "
+      + this.forks + "\nlanguages: " + getLanguages + "\nstargazers: " + getStarGazersCount
+      + "\ncollaborators: " + getCollaborators + "\npull request: " + getPullRequest + "\ncommit comments: " + getCommitCommentsCount
+      )
     }
 
   }
