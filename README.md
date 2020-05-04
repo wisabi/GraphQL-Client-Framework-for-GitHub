@@ -42,10 +42,10 @@ To install this package into a project:
     ```
     
 4. Open your project in IntelliJ IDEA and navigate to File → Project Structure  
-![](./screenshots/2.png)
+![](./screenshots/1.png)
 
 5. Under the Project Settings tab, select Libraries. Select Add under Standard Library  
-![](./screenshots/1.png)
+![](./screenshots/2.png)
 
 6. Navigate to `./alexis_jalomo_project/target/scala-2.13/` and select `githubrepoapi_2.13-0.1.jar`  
 ![](./screenshots/3.png)  
