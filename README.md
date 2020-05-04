@@ -36,9 +36,11 @@ To install this package into a project:
 
     ```
     sbt clean  
+    ```  
+    ```
     sbt package
     ```
-	
+    
 4. Open your project in IntelliJ IDEA and navigate to File → Project Structure  
 ![](./screenshots/2.png)
 
