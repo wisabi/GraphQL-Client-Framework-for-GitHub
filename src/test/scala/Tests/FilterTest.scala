@@ -91,14 +91,17 @@ class FilterTest extends FunSuite {
   }
 
   test("createdOnNthDay filter test"){
-
+    assert(RepoFilters.createdOnNthDay(2019,2,4)(Repo1))
   }
 
   test("createdBeforeDate filter test"){
-
+    val before = RepoFilters.createdBeforeDate(2020,1,1)(Repo2)
+    (before) should be (true)
   }
 
   test("createdAfterDate filter test"){
-
+    val after = RepoFilters.createdAfterDate(2019,1,1)(Repo3)
+    (after) should be (true)
   }
+
 }
