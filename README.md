@@ -16,7 +16,7 @@ To use the plugin properly, be sure to have the following software installed:
 * [sbt 1.3.x ](https://www.scala-sbt.org/download.html)
 * [Scala  2.13.x](https://www.scala-lang.org/download/) 
 * [IntelliJ IDEA](https://www.jetbrains.com/idea/download/)
-* GraphQL Client Framework for Github:
+* GraphQL Client Framework for Github
 
 To install this package into a project:  
 
@@ -35,7 +35,7 @@ To install this package into a project:
 3. Execute these commands on the command line:
 
     ```
-    sbt clean
+    sbt clean  
     sbt package
     ```
 	
