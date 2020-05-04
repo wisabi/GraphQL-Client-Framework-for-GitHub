@@ -1,8 +1,15 @@
 package Queries
 
+/*
+  Type: Language
+  Use:  To facilitate the filtering/query process for the scala client. Specifically,
+        for creating List of languages of which a client would want included during
+        a query of collection-filter call. Values are provided in such that they match
+        how github represents the language on their end.
+ */
+
 object ProgramingLanguages extends Enumeration {
   type Language = Value
-  val All: ProgramingLanguages.Language = Value("All")
   val Java: ProgramingLanguages.Language = Value("Java")
   val Scala: ProgramingLanguages.Language = Value("Scala")
   val CSS: ProgramingLanguages.Language = Value("CSS")

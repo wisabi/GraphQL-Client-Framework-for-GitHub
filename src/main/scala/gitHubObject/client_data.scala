@@ -9,6 +9,7 @@ import com.typesafe.scalalogging.Logger
 object client_data {
 
  def GetAuthCodeFromConfig(): String = {
+  //TODO: if bad credentials, assert that config file bad key
   val configLog = Logger(LoggerFactory.getLogger("logger"))
   val config: Config = ConfigFactory.load("lightbend.conf")
   val key = config.getString("githubAPI.key")

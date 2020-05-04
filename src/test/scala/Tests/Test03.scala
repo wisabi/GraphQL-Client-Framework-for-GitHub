@@ -1,6 +1,5 @@
 package Tests
 
-import Queries.Main.{MyRepoQuery, MyReposList, githubObject}
 import Queries.RequestType.MyRepos
 import Queries.{GithubQuery, QueryInfo, RequestType}
 import RepoParser.JSONParser
