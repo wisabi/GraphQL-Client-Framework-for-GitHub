@@ -22,22 +22,22 @@ To install this package into a project:
 
 1.  Download GraphQL Client Framework for Github
 
-    ```js
+    ```  
     git clone https://bitbucket.org/Jalomo1197/alexis_jalomo_project/
     ```
 	
 2. Navigate to the project root folder  
 
-    ```js
+    ```
     cd alexis_jalomo_project/  
     ```
     
 3. Execute these commands on the command line:
 
-	```js
-	sbt clean
-	sbt package
-	```
+    ```
+    sbt clean
+    sbt package
+    ```
 	
 4. Open your project in IntelliJ IDEA and navigate to File → Project Structure  
 ![](./screenshots/2.png)
@@ -54,7 +54,7 @@ Apply the changes. The package will now be usable within the user's project.
 ## Testing
 To execute the unit tests from the command line, execute the following commands:  
 
-```js
+```
 cd alexis_jalomo_project/  
 sbt clean
 sbt compile
