@@ -5,8 +5,20 @@ Jacob Sanchez
 CS474, Spring 2020
 
 ## Description
+This project is a pure functional object-oriented design framework for composing and executing external GraphQL commands from Scala client programs. The framework obtains and processes the results of these executions. Results are processed by extracting and organizing git repository data, in relation to the Github developer schema, via a lightweight JSON parser.  
 
-## Commands
+## Commands  
+
+There exist three supported query types for the github’s API. The desired type must be specified during the creation of the Query.
+
+
+
+	```java 
+	GithubQuery[QueryInfo]().withQueryType(/*Desired Query Type*/) 
+	```
+    
+Query types MyRepos and MyContributedToRepos are relative to the owner of the github authorization key.
+
 
 ## Installation
 
