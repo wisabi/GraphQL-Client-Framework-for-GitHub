@@ -90,6 +90,57 @@ The filter-type commands are meant to be used for filtering a collection of repo
     // Filtering
     Val ScalaRepos: Seq[Repo] = ReposList.filter(/* partial function call */)
 
+You can also add desired filters during the construction of the GithubQuery like so:
+
+    Val MyQuery = GithubQuery[QueryInfo]().withQueryType(MyRepos).withFilter(/*func call */)
+
+
+### Partial function calls supported:
+
+Filter to obtain all repositories that include Scala code:
+
+    includeLanguages(languages: List[ProgrammingLanguages.Languages])
+
+Filter to obtain all repositories that have at least a certain amount of pulls:
+
+    MinimumPulls(amount: Int)
+    
+Filter to obtain all repositories that have at most a certain amount of pulls:
+
+    MaxPulls(amount: Int)
+
+
+Filter to obtain all repositories that have at least a certain amount of forks:
+
+    MinimumForks(amount: Int)
+
+Filter to obtain all repositories that have at most a certain amount of forks:
+
+    MaxForks(amount: Int)
+
+
+Filter to obtain all repositories that have a description:
+ 
+      NonNullDescriptions
+
+Filter to obtain all repositories that have a null description:
+
+    NullDescriptions
+
+Filter to obtain all repositories that were created on a specified day:
+
+    createdOnNthDay(year: Int, month: Int, day: Int)
+
+Filter to obtain all repositories that were created before a specified day:
+
+    createdBeforeDate(year: Int, month: Int, day: Int)
+
+Filter to obtain all repositories that were created after a specified day:
+
+    createdAfterDate(year: Int, month: Int, day: Int)
+
+
+
 
 ## Installation
 
