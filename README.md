@@ -10,7 +10,7 @@ This project is a pure functional object-oriented design framework for composing
 
 ## Installation
 
-To use the plugin properly, be sure to have the following software installed:  
+To use this framework, be sure to have the following software installed:  
 
 * [Java SE Development Kit 11](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html)
 * [sbt 1.3.x ](https://www.scala-sbt.org/download.html)
