@@ -55,26 +55,47 @@ object JSONParser {
                     collaboratorsConnection: Option[CollaboratorsConnection], ///<-----changed this to option
                     pullRequestsConnection: PullRequestsConnection,
                     commitComments: Forks
-                  ){
+                  ) {
 
     def getPrimaryLanguage: String = {
       logger.trace("Executing: getPrimaryLanguage")
+      if (this.primaryLanguage == null)
+        return "No primary language exist"
       this.primaryLanguage.language
     }
-
     //Traverse through collaborator connections to get list of collaborators
     def getCollaborators: List[Collaborators] = {
       //TODO: if none
       logger.trace("Executing: getCollaborators")
+      val empty = List(Collaborators("No collaborators exist", "null"))
+      if (this.collaboratorsConnection.get.collaborators.headOption.isEmpty)
+        return empty
       this.collaboratorsConnection.get.collaborators.toList
     }
-    def getPullRequests: List[PullRequestsList] = {
+    def getCollaboratorsByLoginName: String = {
+      getCollaborators.map(c => c.loginName ).mkString(" , ")
+    }
+    def getCollaboratorsByName: String = {
+      getCollaborators.map(c => c.name ).mkString(" , ")
+    }
+    def getPullRequestsList: List[PullRequestsList] = {
       logger.trace("Executing: getPullRequest")
+      val empty = List(PullRequestsList("No pull request exist", Author(""),""))
+      if (this.pullRequestsConnection.pullRequestsList.headOption.isEmpty)
+        return empty
       this.pullRequestsConnection.pullRequestsList.toList
     }
-    def getLanguages: List[String] = {
+    def getPullRequests: String = {
+      logger.trace("Executing: getPullRequest")
+      getPullRequestsList.map(p => p.title + p.author.userLogin  + p.createdDate).mkString(" , ")
+    }
+    def getLanguagesList: List[String] = {
       logger.trace("Executing: getLanguages")
       this.languagesConnection.programingLanguages.toList.map(a => a.language)
+    }
+    def getLanguages: String = {
+      logger.trace("Executing: getLanguages")
+      getLanguagesList.mkString(" , ")
     }
     def getStarGazersCount: Int = {
       logger.trace("Executing: getStarGazersCount")
@@ -84,15 +105,17 @@ object JSONParser {
       logger.trace("Executing: getCommitCommentsCount")
       this.commitComments.totalCount
     }
+    def getForks: Int = {
+      this.forks.totalCount
+    }
     def printRepoInfo: Unit = {
       logger.trace("Executing: getRepoInfo")
-      println("repoName: " + this.repoName + "\nnameWithOwner: " + this.nameWithOwner + "\ncreatedDate: " + this.createdDate + "\nlastPushed: " + this.lastPushed
-      + "\ndescription: " + this.description + "\nprimaryLanguage: " + this.primaryLanguage.language + "\nowner: " + this.owner.loginName + "\nforks: "
-      + this.forks + "\nlanguages: " + getLanguages + "\nstargazers: " + getStarGazersCount
-      + "\ncollaborators: " + getCollaborators + "\npull request: " + getPullRequests + "\ncommit comments: " + getCommitCommentsCount
+      println("\nRepository: " + this.repoName + "\nName with owner: " + this.nameWithOwner + "\nDate Created: " + this.createdDate + "\nLast Pushed: " + this.lastPushed
+        + "\nDescription: " + this.description + "\nPrimary Language: " + getPrimaryLanguage + "\nOwner: " + this.owner.loginName + "\nNumber of Forks: "
+        + getForks + "\nLanguages: " + getLanguages + "\nStar Gazers: " + getStarGazersCount
+        + "\nCollaborators: " + getCollaboratorsByLoginName + "\nPull Request: " + getPullRequests + "\nCommit Comments: " + getCommitCommentsCount
       )
     }
-
   }
 
   /****************************************************************************************************
