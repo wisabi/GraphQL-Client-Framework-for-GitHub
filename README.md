@@ -65,6 +65,21 @@ Once the collection of repositories is obtained, there are two types of commands
  Prints information about the repository
 
 ##### Relevant Repo fields:
+* ```Repo.repoName```  
+ Repository’s name  
+ 
+* ```Repo.nameWithOwner```   
+ Repository’s name with owner
+
+* ```Repo.createdDate```  
+ Repository’s creation date
+ 
+* ```Repo.lastPushed```  
+ Repository’s last pushed date
+
+* ```Repo.description```  
+ Repository’s description (null if repository has no description on github)
+
 
 
 
