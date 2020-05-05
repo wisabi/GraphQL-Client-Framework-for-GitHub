@@ -4,9 +4,9 @@ package Tests
 import org.scalatest._
 import org.scalatest.Matchers._
 /* libraries needed for testing */
-import Queries.RepoFilters
-import RepoParser.JSONParser.{Author, Collaborators, CollaboratorsConnection, Forks, LanguagesConnection, Owner, PrimaryLanguage, PullRequestsConnection, PullRequestsList, Repo}
-import Queries.ProgramingLanguages.{Scala, Python, CPP}
+import Queries.RepoFilters._
+import RepoParser.JSONParser._
+import Queries.ProgramingLanguages._
 
 
 class FilterTest extends FunSuite {
@@ -38,69 +38,69 @@ class FilterTest extends FunSuite {
 
 
   test("includeLanguages filter test"){
-    val RepoFilter = RepoSeq.filter(RepoFilters.includeLanguages(List(Scala)))
+    val RepoFilter = RepoSeq.filter(includeLanguages(List(Scala)))
     RepoFilter.length should be (3)
 
-    val RepoFilter2 = RepoSeq.filter(RepoFilters.includeLanguages(List(Python)))
+    val RepoFilter2 = RepoSeq.filter(includeLanguages(List(Python)))
     RepoFilter2.length should be (1)
 
-    val RepoFilter3 = RepoSeq.filter(RepoFilters.includeLanguages(List(CPP, Python)))
+    val RepoFilter3 = RepoSeq.filter(includeLanguages(List(CPP, Python)))
     RepoFilter3.length should be (2)
   }
 
   test("MinimumPulls filter test"){
-    val RepoFilter = RepoSeq.filter(RepoFilters.MinimumPulls(1))
+    val RepoFilter = RepoSeq.filter(MinimumPulls(1))
     RepoFilter.length should be (4)
 
-    val RepoFilter2 = RepoSeq.filter(RepoFilters.MinimumPulls(2))
+    val RepoFilter2 = RepoSeq.filter(MinimumPulls(2))
     RepoFilter2.length should be (0)
   }
 
   test("MaxPulls filter test"){
-    val RepoFilter = RepoSeq.filter(RepoFilters.MaxPulls(1))
+    val RepoFilter = RepoSeq.filter(MaxPulls(1))
     RepoFilter.length should be (4)
 
-    val RepoFilter2 = RepoSeq.filter(RepoFilters.MaxPulls(0))
+    val RepoFilter2 = RepoSeq.filter(MaxPulls(0))
     RepoFilter2.length should be (0)
   }
 
   test("MinimumForks filter test"){
-    val RepoFilter = RepoSeq.filter(RepoFilters.MinimumForks(3))
+    val RepoFilter = RepoSeq.filter(MinimumForks(3))
     RepoFilter.length should be (3)
 
-    val RepoFilter2 = RepoSeq.filter(RepoFilters.MinimumForks(5))
+    val RepoFilter2 = RepoSeq.filter(MinimumForks(5))
     RepoFilter2.length should be (1)
   }
 
   test("MaxForks filter test"){
-    val RepoFilter = RepoSeq.filter(RepoFilters.MaxForks(3))
+    val RepoFilter = RepoSeq.filter(MaxForks(3))
     RepoFilter.length should be (2)
 
-    val RepoFilter2 = RepoSeq.filter(RepoFilters.MaxForks(5))
+    val RepoFilter2 = RepoSeq.filter(MaxForks(5))
     RepoFilter2.length should be (4)
   }
 
   test("NonNullDescriptions filter test"){
-    val RepoFilter = RepoSeq.filter(RepoFilters.NonNullDescriptions)
+    val RepoFilter = RepoSeq.filter(NonNullDescriptions)
     RepoFilter.length should be (3)
   }
 
   test("NullDescriptions filter test"){
-    val RepoFilter = RepoSeq.filter(RepoFilters.NullDescriptions)
+    val RepoFilter = RepoSeq.filter(NullDescriptions)
     RepoFilter.length should be (1)
   }
 
   test("createdOnNthDay filter test"){
-    assert(RepoFilters.createdOnNthDay(2019,2,4)(Repo1))
+    assert(createdOnNthDay(2019,2,4)(Repo1))
   }
 
   test("createdBeforeDate filter test"){
-    val before = RepoFilters.createdBeforeDate(2020,1,1)(Repo2)
+    val before = createdBeforeDate(2020,1,1)(Repo2)
     (before) should be (true)
   }
 
   test("createdAfterDate filter test"){
-    val after = RepoFilters.createdAfterDate(2019,1,1)(Repo3)
+    val after = createdAfterDate(2019,1,1)(Repo3)
     (after) should be (true)
   }
 
