@@ -186,7 +186,7 @@ Filter to obtain all repositories that have at most a certain amount of forks:
 
 Filter to obtain all repositories that have a description:
  
-      NonNullDescriptions
+    NonNullDescriptions
 
 Filter to obtain all repositories that have a null description:
 
