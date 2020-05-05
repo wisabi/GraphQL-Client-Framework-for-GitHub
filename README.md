@@ -7,6 +7,52 @@ CS474, Spring 2020
 ## Description  
 This project is a pure functional object-oriented design framework for composing and executing external GraphQL commands from Scala client programs. The framework obtains and processes the results of these executions. Results are processed by extracting and organizing git repository data, in relation to the GitHub developer schema, via a lightweight JSON parser.
 
+
+## Installation
+
+To use the plugin properly, be sure to have the following software installed:  
+
+* [Java SE Development Kit 11](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html)
+* [sbt 1.3.x ](https://www.scala-sbt.org/download.html)
+* [Scala  2.13.x](https://www.scala-lang.org/download/) 
+* [IntelliJ IDEA](https://www.jetbrains.com/idea/download/)
+* GraphQL Client Framework for Github
+
+To install this package into a project:  
+
+1.  Download GraphQL Client Framework for Github
+
+    ```  
+    git clone https://bitbucket.org/Jalomo1197/alexis_jalomo_project/
+    ```
+	
+2. Navigate to the project root folder  
+
+    ```
+    cd alexis_jalomo_project/  
+    ```
+    
+3. Execute these commands on the command line:
+
+    ```
+    sbt clean  
+    ```  
+    ```
+    sbt package
+    ```
+    
+4. Open your project in IntelliJ IDEA and navigate to File → Project Structure  
+![](./screenshots/1.png)
+
+5. Under the Project Settings tab, select Libraries. Select Add under Standard Library  
+![](./screenshots/2.png)
+
+6. Navigate to `./alexis_jalomo_project/target/scala-2.13/` and select `githubrepoapi_2.13-0.1.jar`  
+![](./screenshots/3.png)  
+Apply the changes. The package will now be usable within the user's project.
+
+
+
 ## Usage Details
 
 #### Configuration
@@ -203,52 +249,6 @@ Filter to obtain all repositories that were created before a specified day:
 Filter to obtain all repositories that were created after a specified day:
 
     createdAfterDate(year: Int, month: Int, day: Int)
-
-
-
-
-## Installation
-
-To use the plugin properly, be sure to have the following software installed:  
-
-* [Java SE Development Kit 11](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html)
-* [sbt 1.3.x ](https://www.scala-sbt.org/download.html)
-* [Scala  2.13.x](https://www.scala-lang.org/download/) 
-* [IntelliJ IDEA](https://www.jetbrains.com/idea/download/)
-* GraphQL Client Framework for Github
-
-To install this package into a project:  
-
-1.  Download GraphQL Client Framework for Github
-
-    ```  
-    git clone https://bitbucket.org/Jalomo1197/alexis_jalomo_project/
-    ```
-	
-2. Navigate to the project root folder  
-
-    ```
-    cd alexis_jalomo_project/  
-    ```
-    
-3. Execute these commands on the command line:
-
-    ```
-    sbt clean  
-    ```  
-    ```
-    sbt package
-    ```
-    
-4. Open your project in IntelliJ IDEA and navigate to File → Project Structure  
-![](./screenshots/1.png)
-
-5. Under the Project Settings tab, select Libraries. Select Add under Standard Library  
-![](./screenshots/2.png)
-
-6. Navigate to `./alexis_jalomo_project/target/scala-2.13/` and select `githubrepoapi_2.13-0.1.jar`  
-![](./screenshots/3.png)  
-Apply the changes. The package will now be usable within the user's project.
 
 
 ## Testing
