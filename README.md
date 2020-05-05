@@ -9,13 +9,62 @@ CS474, Spring 2020
 ## Commands
 ### Query Commands
 
-There exist three supported query types for the github’s API. The desired type must be specified during the creation of the Query:
+There exist three supported query types for the github’s API. The desired type must be specified during the creation of the Query.
 
 ```
 GithubQuery[QueryInfo]().withQueryType(/*Desired Query Type*/)
 ```
 
 Query types MyRepos and MyContributedToRepos are relative to the owner of the github authorization key.
+
+#### MyRepos
+This query type is meant to retrieve the user’s first 100 repositories. 
+
+```
+GithubQuery[QueryInfo]().withQueryType(MyRepos)
+```
+
+#### MyContributedToRepos
+This query type is meant to retrieve the user’s first 100 contributed to repositories.
+
+```
+GithubQuery[QueryInfo]().withQueryType(MyContributedToRepos)
+```
+
+#### SpecificUser
+This query type is meant to retrieve the first 100 repositories of a specified user. If no user is specified (meaning withSpecificUser was not called), then the query type is changed to MyRepos when sent to github’s API.
+
+```
+GithubQuery[QueryInfo]().withQueryType(SpecificUser).withSpecificUser(“jalomo1197”)
+```
+
+### Repo Commands
+Once the collection of repositories is obtained, there are two types of commands that can be made. 
+
+#### Access-type commands 
+##### Functions:
+* ```getCollaborators: List[Collaborators]```  
+ Returns the collaborators of the repository (empty if user does not have push rights)
+    
+* ```getPullRequests: List[PullRequestsList]```  
+ Returns the 10 most recent pull requests of the repository
+ 
+* ```getLanguages: List[String]```  
+  Returns the programming languages used for the repository
+  
+* ```getPrimaryLanguage: String```  
+ Returns the primary language of the repository
+ 
+* ```getStarGazersCount: Int```  
+ Returns the amount of star grazers the repository has
+ 
+* ```getCommitCommentsCount: Int```  
+ Returns the amount of commit comments the repository has
+ 
+* ```printRepoInfo: Unit```  
+ Prints information about the repository
+
+##### Relevant Repo fields:
 
 
 
