@@ -57,13 +57,18 @@ object JSONParser {
                     commitComments: Forks
                   ){
 
+    def getPrimaryLanguage: String = {
+      logger.trace("Executing: getPrimaryLanguage")
+      this.primaryLanguage.language
+    }
+
     //Traverse through collaborator connections to get list of collaborators
     def getCollaborators: List[Collaborators] = {
       //TODO: if none
       logger.trace("Executing: getCollaborators")
       this.collaboratorsConnection.get.collaborators.toList
     }
-    def getPullRequest: List[PullRequestsList] = {
+    def getPullRequests: List[PullRequestsList] = {
       logger.trace("Executing: getPullRequest")
       this.pullRequestsConnection.pullRequestsList.toList
     }
@@ -79,12 +84,12 @@ object JSONParser {
       logger.trace("Executing: getCommitCommentsCount")
       this.commitComments.totalCount
     }
-    def getRepoInfo: Unit = {
+    def printRepoInfo: Unit = {
       logger.trace("Executing: getRepoInfo")
       println("repoName: " + this.repoName + "\nnameWithOwner: " + this.nameWithOwner + "\ncreatedDate: " + this.createdDate + "\nlastPushed: " + this.lastPushed
       + "\ndescription: " + this.description + "\nprimaryLanguage: " + this.primaryLanguage.language + "\nowner: " + this.owner.loginName + "\nforks: "
       + this.forks + "\nlanguages: " + getLanguages + "\nstargazers: " + getStarGazersCount
-      + "\ncollaborators: " + getCollaborators + "\npull request: " + getPullRequest + "\ncommit comments: " + getCommitCommentsCount
+      + "\ncollaborators: " + getCollaborators + "\npull request: " + getPullRequests + "\ncommit comments: " + getCommitCommentsCount
       )
     }
 
