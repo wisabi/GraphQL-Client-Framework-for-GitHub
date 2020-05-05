@@ -264,7 +264,7 @@ Once the tests has completed, the testing report appears here:  `./alexis_jalomo
 
 ## Limitations
 
-Query requests must pass Github GraphQL API v4 schema validations.
+Query requests must pass [Github GraphQL API v4 schema validations](https://developer.github.com/v4/guides/resource-limitations/).
 
 ### Node Limit
 
@@ -296,3 +296,7 @@ The following resources were used:
 * [Scala Language Specification](https://scala-lang.org/files/archive/spec/2.11/)
 * [Functional Programming in Scala](https://www.oreilly.com/library/view/functional-programming-in/9781617290657/)
 * [sbt Reference Manual](https://www.scala-sbt.org/1.x/docs/)
+
+## Demo
+![](./screenshots/DemoCode.png)
+![](./screenshots/demo_output.png)
