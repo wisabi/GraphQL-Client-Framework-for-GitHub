@@ -298,5 +298,7 @@ The following resources were used:
 * [sbt Reference Manual](https://www.scala-sbt.org/1.x/docs/)
 
 ## Demo
+###Input
 ![](./screenshots/DemoCode.png)
+###Output
 ![](./screenshots/demo_output.png)
