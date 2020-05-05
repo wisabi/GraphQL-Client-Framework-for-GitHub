@@ -80,7 +80,15 @@ Once the collection of repositories is obtained, there are two types of commands
 * ```Repo.description```  
  Repository’s description (null if repository has no description on github)
 
+#### Filter-type commands
+The filter-type commands are meant to be used for filtering a collection of repositories. These functions are meant to be partially called inside a filter call 
 
+    // Set Up
+    Val MyQuery = GithubQuery[QueryInfo]().withQueryType(MyRepos)
+    Val OptionReposList: Option[Seq[Repo]] = github.flatMap(MyQuery.build)
+    Val ReposList: Seq[Repo] = OptionReposList.get
+    // Filtering
+    Val ScalaRepos: Seq[Repo] = ReposList.filter(/* partial function call */)
 
 
 ## Installation
