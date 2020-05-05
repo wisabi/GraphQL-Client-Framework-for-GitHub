@@ -11,16 +11,7 @@ CS474, Spring 2020
 
 There exist three supported query types for the github’s API. The desired type must be specified during the creation of the Query:
 
-To indicate a span of code, wrap it with `` ` `` (backtick). Unlike a pre-formatted code block, a code span indicates code within a normal paragraph. For example:
-
-Use the `printf()` function.
-
-is produced from:
-
-	Use the `printf()` function.
-	
-To include a literal backtick character within a code span, you can use multiple backticks as the opening and closing delimiters:
-
+    GithubQuery[QueryInfo]().withQueryType(/*Desired Query Type*/)
 
 Query types MyRepos and MyContributedToRepos are relative to the owner of the github authorization key.
 
