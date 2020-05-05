@@ -68,7 +68,7 @@ object JSONParser {
       //TODO: if none
       logger.trace("Executing: getCollaborators")
       val empty = List(Collaborators("No collaborators exist", "null"))
-      if (this.collaboratorsConnection.get.collaborators.headOption.isEmpty)
+      if (this.collaboratorsConnection.isEmpty)
         return empty
       this.collaboratorsConnection.get.collaborators.toList
     }
@@ -108,10 +108,13 @@ object JSONParser {
     def getForks: Int = {
       this.forks.totalCount
     }
+    def getDescription: String = {
+      this.description
+    }
     def printRepoInfo: Unit = {
       logger.trace("Executing: getRepoInfo")
       println("\nRepository: " + this.repoName + "\nName with owner: " + this.nameWithOwner + "\nDate Created: " + this.createdDate + "\nLast Pushed: " + this.lastPushed
-        + "\nDescription: " + this.description + "\nPrimary Language: " + getPrimaryLanguage + "\nOwner: " + this.owner.loginName + "\nNumber of Forks: "
+        + "\nDescription: " + getDescription + "\nPrimary Language: " + getPrimaryLanguage + "\nOwner: " + this.owner.loginName + "\nNumber of Forks: "
         + getForks + "\nLanguages: " + getLanguages + "\nStar Gazers: " + getStarGazersCount
         + "\nCollaborators: " + getCollaboratorsByLoginName + "\nPull Request: " + getPullRequests + "\nCommit Comments: " + getCommitCommentsCount
       )
