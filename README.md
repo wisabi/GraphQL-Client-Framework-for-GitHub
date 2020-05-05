@@ -250,7 +250,6 @@ To install this package into a project:
 ![](./screenshots/3.png)  
 Apply the changes. The package will now be usable within the user's project.
 
-## Usage
 
 ## Testing
 To execute the unit tests from the command line, execute the following commands:  
@@ -263,6 +262,17 @@ sbt test
 ```
 Once the tests has completed, the testing report appears here:  `./alexis_jalomo_project/target/test-reports/index.html` 
 
+## Limitations
+
+Query requests must pass Github GraphQL API v4 schema validations.
+
+### Node Limit
+
+Individual calls cannot request more than 500,000 Nodes
+
+### Rate Limit
+
+GraphQL API v4 rate limit is 5,000 points per hour
 
 ## Logging
 Log files can be found in the ./alexis_jalomo_projec/Logs directory. Log files follow the log-YYYY-MM-DD.log naming format.
