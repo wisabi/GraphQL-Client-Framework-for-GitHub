@@ -4,7 +4,72 @@ Alex Jalomo
 Jacob Sanchez  
 CS474, Spring 2020
 
-## Description
+## Description  
+This project is a pure functional object-oriented design framework for composing and executing external GraphQL commands from Scala client programs. The framework obtains and processes the results of these executions. Results are processed by extracting and organizing git repository data, in relation to the Github developer schema, via a lightweight JSON parser.
+
+## Usage Details
+
+#### Configuration
+
+Place your [github access token](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line) in the configuration file loacted here: `./alexis_jalomo_project/src/main/resources/lightbend.conf` 
+
+    githubAPI {
+     key = "your github access token here"
+    }
+
+### Usage Help
+
+Three Phases:
+
+* Create a GitHub object
+* Create a Query  
+* Apply Query to the GitHub object
+
+### Create the GithubObject
+
+    val Github = (new  Github).withAuthCode(client_data.GetAuthCodeFromConfig()).build //Specific user object
+    
+### Create Query
+
+When building a query, the `RequestType` is strictly required. (see Query Commands).
+Query must be built `withQueryType` to enter `RequestType`.
+
+    GithubQuery[QueryInfo]().withQueryType(/*Desired Query Type*/)
+
+#### RequestType
+
+* MyRepos
+* MyContributedToRepos
+* SpecificUser
+
+
+### Apply Query to Github Object
+
+Below is an example of creating a Query of `SpecificUser` type.
+
+    val  SpecificUserQuery  =  Github[QueryInfo]().withQueryType(SpecificUser).withSpecificUser("wisabi")
+    val  SpecificUserList  = Github.flatMap(SpecificUserQuery.build)
+    val  UserList  =  SpecificUserList.get
+
+#### Applying Query to Github Object
+
+
+The Github object when invoked via flatMap will respond to the Query and return a String in relation to the [Github Developer Schema](https://developer.github.com/v4/public_schema/). The response is passed to the builder for whichever RequestType is invoked. The builder applies all filters based on the `RequestType` chosen. The Query built is passed to the github object and returns type: 
+
+    Option[Seq[Repo]]
+
+The Query builder return type is wrapped in an Option to handle cases where user repositories are empty.
+
+#### Acquire wanted data from a list of repositories.
+
+An example to get a list of languages for a specific user:
+
+    for (x <- UserList){
+	    println("ProgramingLanguages: ")
+	    println(x.getLanguages)
+    }
+
+
 
 ## Commands
 ### Query Commands
