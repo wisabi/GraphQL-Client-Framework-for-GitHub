@@ -11,9 +11,9 @@ CS474, Spring 2020
 
 There exist three supported query types for the github’s API. The desired type must be specified during the creation of the Query:
 
-'''
+```
 GithubQuery[QueryInfo]().withQueryType(/*Desired Query Type*/)
-'''
+```
 
 Query types MyRepos and MyContributedToRepos are relative to the owner of the github authorization key.
 
