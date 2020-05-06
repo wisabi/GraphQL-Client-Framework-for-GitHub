@@ -250,7 +250,11 @@ Filter to obtain all repositories that were created after a specified day:
 
     createdAfterDate(year: Int, month: Int, day: Int)
 
-
+## Demo
+### Input
+![](./screenshots/DemoCode.png)
+### Output
+![](./screenshots/demo_output.png)
 ## Testing
 To execute the unit tests from the command line, execute the following commands:  
 
@@ -297,8 +301,3 @@ The following resources were used:
 * [Functional Programming in Scala](https://www.oreilly.com/library/view/functional-programming-in/9781617290657/)
 * [sbt Reference Manual](https://www.scala-sbt.org/1.x/docs/)
 
-## Demo
-###Input
-![](./screenshots/DemoCode.png)
-###Output
-![](./screenshots/demo_output.png)
