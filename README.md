@@ -23,13 +23,13 @@ To install this package into a project:
 1.  Download GraphQL Client Framework for Github
 
     ```  
-    git clone https://bitbucket.org/Jalomo1197/alexis_jalomo_project/
+    git clone https://github.com/wisabi/GraphQL-Client-Framework-for-GitHub.git
     ```
 	
 2. Navigate to the project root folder  
 
     ```
-    cd alexis_jalomo_project/  
+    cd GraphQL-Client-Framework-for-GitHub
     ```
     
 3. Execute these commands on the command line:
@@ -47,7 +47,7 @@ To install this package into a project:
 5. Under the Project Settings tab, select Libraries. Select Add under Standard Library  
 ![](./screenshots/2.png)
 
-6. Navigate to `./alexis_jalomo_project/target/scala-2.13/` and select `githubrepoapi_2.13-0.1.jar`  
+6. Navigate to `./GraphQL-Client-Framework-for-GitHub/target/scala-2.13/` and select `githubrepoapi_2.13-0.1.jar`  
 ![](./screenshots/3.png)  
 Apply the changes. The package will now be usable within the user's project.
 
@@ -57,7 +57,7 @@ Apply the changes. The package will now be usable within the user's project.
 
 #### Configuration
 
-Place your [GitHub access token](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line) in the configuration file loacted here: `./alexis_jalomo_project/src/main/resources/lightbend.conf` 
+Place your [GitHub access token](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line) in the configuration file loacted here: `./GraphQL-Client-Framework-for-GitHub/src/main/resources/lightbend.conf` 
 
     githubAPI {
      key = "your github access token here"
@@ -259,12 +259,12 @@ Filter to obtain all repositories that were created after a specified day:
 To execute the unit tests from the command line, execute the following commands:  
 
 ```
-cd alexis_jalomo_project/  
+cd GraphQL-Client-Framework-for-GitHub/  
 sbt clean
 sbt compile
 sbt test
 ```
-Once the tests has completed, the testing report appears here:  `./alexis_jalomo_project/target/test-reports/index.html` 
+Once the tests has completed, the testing report appears here:  `./GraphQL-Client-Framework-for-GitHub/target/test-reports/index.html` 
 
 ## Limitations
 
@@ -279,7 +279,7 @@ Individual calls cannot request more than 500,000 Nodes
 GraphQL API v4 rate limit is 5,000 points per hour
 
 ## Logging
-Log files can be found in the ./alexis_jalomo_projec/Logs directory. Log files follow the log-YYYY-MM-DD.log naming format.
+Log files can be found in the ./GraphQL-Client-Framework-for-GitHub/Logs directory. Log files follow the log-YYYY-MM-DD.log naming format.
 
 ## Open Source Tools
 The following open source tools and their documentation were used for this project:  
